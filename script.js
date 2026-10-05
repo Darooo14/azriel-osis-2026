@@ -1,56 +1,139 @@
-// ==========================================
-// AZRIEL OSIS — SCRIPT.JS
-// MENU + SUPABASE ONLINE VOTE
-// ==========================================
+```javascript
+/* =========================
+   NAVBAR
+========================= */
 
+const navbar = document.getElementById("navbar");
 
-// ==========================================
-// SUPABASE CONFIG
-// ==========================================
+window.addEventListener("scroll", () => {
 
-const SUPABASE_URL = "https://flllmissujjnwecbvbtp.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_AtBpcdqmJPx0WVzZdqfKjg_bhNmK93q";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
-
-
-// ==========================================
-// MOBILE MENU
-// ==========================================
-
-function toggleMenu() {
-
-    const menu = document.getElementById("navMenu");
-
-    if (!menu) return;
-
-    if (menu.style.display === "flex") {
-        menu.style.display = "none";
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
     } else {
-        menu.style.display = "flex";
+        navbar.classList.remove("scrolled");
     }
+
+});
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+if (menuBtn && navLinks) {
+
+    menuBtn.addEventListener("click", () => {
+
+        navLinks.classList.toggle("open");
+
+        menuBtn.textContent =
+            navLinks.classList.contains("open")
+                ? "✕"
+                : "☰";
+
+    });
+
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("open");
+
+            menuBtn.textContent = "☰";
+
+        });
+
+    });
 
 }
 
 
-// Tutup menu setelah link diklik
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-document.querySelectorAll("#navMenu a").forEach(link => {
+const revealElements =
+    document.querySelectorAll(".reveal");
 
-    link.addEventListener("click", () => {
+const observer =
+    new IntersectionObserver(
+        entries => {
 
-        if (window.innerWidth <= 850) {
+            entries.forEach(entry => {
 
-            const menu = document.getElementById("navMenu");
+                if (entry.isIntersecting) {
 
-            if (menu) {
-                menu.style.display = "none";
-            }
+                    entry.target.classList.add("active");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+/* =========================
+   ACTIVE NAV
+========================= */
+
+const sections =
+    document.querySelectorAll(
+        "section[id], header[id]"
+    );
+
+const navItems =
+    document.querySelectorAll(
+        ".nav-links a:not(.nav-support)"
+    );
+
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const top =
+            section.offsetTop - 150;
+
+        if (window.scrollY >= top) {
+
+            current =
+                section.getAttribute("id");
+
+        }
+
+    });
+
+
+    navItems.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (
+            link.getAttribute("href")
+            ===
+            "#" + current
+        ) {
+
+            link.classList.add("active");
 
         }
 
@@ -59,92 +142,504 @@ document.querySelectorAll("#navMenu a").forEach(link => {
 });
 
 
-// Atur menu saat ukuran layar berubah
+/* =========================
+   BACK TO TOP
+========================= */
 
-window.addEventListener("resize", () => {
+const topBtn =
+    document.getElementById("topBtn");
 
-    const menu = document.getElementById("navMenu");
 
-    if (!menu) return;
+window.addEventListener("scroll", () => {
 
-    if (window.innerWidth > 850) {
+    if (window.scrollY > 500) {
 
-        menu.style.display = "flex";
+        topBtn.classList.add("show");
 
     } else {
 
-        menu.style.display = "none";
+        topBtn.classList.remove("show");
 
     }
 
 });
 
 
-// ==========================================
-// SUPABASE VOTE
-// ==========================================
+topBtn.addEventListener("click", () => {
 
-const supportBtn = document.getElementById("supportBtn");
-const supportCount = document.getElementById("supportCount");
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
 
 
-// Ambil jumlah vote dari database
+/* =========================
+   TOAST
+========================= */
 
-async function loadVotes() {
+const toast =
+    document.getElementById("toast");
 
-    if (!supportCount) return;
 
-    try {
+let toastTimer;
 
-        const { data, error } = await supabaseClient
-            .from("votes")
-            .select("count")
-            .eq("id", 1)
-            .single();
 
-        if (error) {
+function showToast(message) {
 
-            console.error("Gagal mengambil jumlah vote:", error);
+    if (!toast) return;
 
-            supportCount.textContent = "0";
+    clearTimeout(toastTimer);
 
-            return;
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+/* =========================
+   QR CODE
+========================= */
+
+const qrImage =
+    document.getElementById("qrImage");
+
+
+if (qrImage) {
+
+    const websiteURL =
+        "https://darooo14.github.io/WEB-AZRIEL/";
+
+    qrImage.src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data="
+        + encodeURIComponent(websiteURL);
+
+}
+
+
+/* =========================
+   QR ERROR CHECK
+========================= */
+
+if (qrImage) {
+
+    qrImage.addEventListener("error", () => {
+
+        qrImage.alt =
+            "QR Code gagal dimuat";
+
+        showToast(
+            "QR Code gagal dimuat. Cek koneksi internet."
+        );
+
+    });
+
+}
+
+
+/* =========================
+   COPY WEBSITE LINK
+========================= */
+
+const copyWebBtn =
+    document.getElementById("copyWebBtn");
+
+
+if (copyWebBtn) {
+
+    copyWebBtn.addEventListener(
+        "click",
+        async () => {
+
+            const websiteURL =
+                "https://darooo14.github.io/WEB-AZRIEL/";
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    websiteURL
+                );
+
+                showToast(
+                    "Link website berhasil disalin ✓"
+                );
+
+            } catch (error) {
+
+                showToast(
+                    "Gagal menyalin link."
+                );
+
+            }
+
         }
+    );
+
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+document
+    .querySelectorAll(".faq-question")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const item =
+                button.parentElement;
+
+            document
+                .querySelectorAll(".faq-item")
+                .forEach(other => {
+
+                    if (other !== item) {
+
+                        other.classList.remove("open");
+
+                    }
+
+                });
+
+            item.classList.toggle("open");
+
+        });
+
+    });
+
+
+/* =========================
+   ASPIRASI
+========================= */
+
+const aspirationInput =
+    document.getElementById(
+        "aspirationInput"
+    );
+
+
+const charCount =
+    document.getElementById(
+        "charCount"
+    );
+
+
+if (aspirationInput) {
+
+    aspirationInput.addEventListener(
+        "input",
+        () => {
+
+            charCount.textContent =
+                aspirationInput.value.length;
+
+        }
+    );
+
+}
+
+
+const savedAspiration =
+    localStorage.getItem(
+        "azrielAspiration"
+    );
+
+
+if (
+    savedAspiration &&
+    aspirationInput
+) {
+
+    aspirationInput.value =
+        savedAspiration;
+
+    charCount.textContent =
+        savedAspiration.length;
+
+}
+
+
+const saveAspiration =
+    document.getElementById(
+        "saveAspiration"
+    );
+
+
+if (saveAspiration) {
+
+    saveAspiration.addEventListener(
+        "click",
+        () => {
+
+            const value =
+                aspirationInput.value.trim();
+
+            if (!value) {
+
+                showToast(
+                    "Tulis aspirasinya dulu 😄"
+                );
+
+                return;
+
+            }
+
+            localStorage.setItem(
+                "azrielAspiration",
+                value
+            );
+
+            showToast(
+                "Aspirasi berhasil disimpan ✓"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://flllmissujjnwecbvbtp.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_AtBpcdqmJPx0WVzZdqfKjg_bhNmK93q";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+const supportBtn =
+    document.getElementById(
+        "supportBtn"
+    );
+
+
+const supportCount =
+    document.getElementById(
+        "supportCount"
+    );
+
+
+const statVotes =
+    document.getElementById(
+        "statVotes"
+    );
+
+
+const progressBar =
+    document.getElementById(
+        "progressBar"
+    );
+
+
+const progressText =
+    document.getElementById(
+        "progressText"
+    );
+
+
+/* =========================
+   VOTE CHECK
+========================= */
+
+function hasVoted() {
+
+    return (
+        localStorage.getItem(
+            "azrielVoted"
+        ) === "true"
+    );
+
+}
+
+
+/* =========================
+   ALREADY VOTED
+========================= */
+
+function showAlreadyVoted() {
+
+    if (!supportBtn) return;
+
+    supportBtn.textContent =
+        "✓ Sudah Didukung";
+
+    supportBtn.classList.add(
+        "supported"
+    );
+
+    supportBtn.disabled = true;
+
+}
+
+
+/* =========================
+   UPDATE VOTE
+========================= */
+
+function updateVoteDisplay(count) {
+
+    const number =
+        Number(count) || 0;
+
+
+    if (supportCount) {
 
         supportCount.textContent =
-            Number(data.count).toLocaleString("id-ID");
+            number.toLocaleString("id-ID");
 
-    } catch (error) {
+    }
 
-        console.error("Supabase error:", error);
+
+    if (statVotes) {
+
+        statVotes.textContent =
+            number.toLocaleString("id-ID");
+
+    }
+
+
+    if (progressBar) {
+
+        const percentage =
+            Math.min(
+                (number / 100) * 100,
+                100
+            );
+
+        progressBar.style.width =
+            percentage + "%";
+
+    }
+
+
+    if (progressText) {
+
+        progressText.textContent =
+            number.toLocaleString("id-ID")
+            +
+            " dukungan terkumpul";
 
     }
 
 }
 
 
-// ==========================================
-// ANIMASI HEART
-// ==========================================
+/* =========================
+   LOAD VOTES
+========================= */
+
+async function loadVotes() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("votes")
+                .select("count")
+                .eq("id", 1)
+                .single();
+
+
+        if (error) {
+
+            console.error(
+                "Gagal mengambil vote:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        updateVoteDisplay(
+            data.count
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Supabase error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   HEART ANIMATION
+========================= */
 
 function createHeartAnimation() {
 
     if (!supportBtn) return;
 
-    const heart = document.createElement("div");
 
-    heart.className = "heart-pop";
-    heart.textContent = "❤️";
+    const heart =
+        document.createElement("div");
 
-    const rect = supportBtn.getBoundingClientRect();
 
-    heart.style.position = "fixed";
-    heart.style.left = `${rect.left + rect.width / 2}px`;
-    heart.style.top = `${rect.top}px`;
-    heart.style.zIndex = "9999";
-    heart.style.pointerEvents = "none";
+    heart.className =
+        "heart-pop";
 
-    document.body.appendChild(heart);
+
+    heart.textContent =
+        "❤️";
+
+
+    const rect =
+        supportBtn.getBoundingClientRect();
+
+
+    heart.style.position =
+        "fixed";
+
+
+    heart.style.left =
+        (
+            rect.left +
+            rect.width / 2
+        ) + "px";
+
+
+    heart.style.top =
+        rect.top + "px";
+
+
+    heart.style.zIndex =
+        "9999";
+
+
+    document.body.appendChild(
+        heart
+    );
+
 
     setTimeout(() => {
 
@@ -155,106 +650,66 @@ function createHeartAnimation() {
 }
 
 
-// ==========================================
-// CEK APAKAH BROWSER SUDAH VOTE
-// ==========================================
-
-function hasVoted() {
-
-    return localStorage.getItem("azrielVoted") === "true";
-
-}
-
-
-// ==========================================
-// TAMPILKAN STATUS SUDAH VOTE
-// ==========================================
-
-function setAlreadyVoted() {
-
-    if (!supportBtn) return;
-
-    supportBtn.textContent = "✓ Sudah Didukung";
-
-    supportBtn.classList.add("supported");
-
-    supportBtn.disabled = true;
-
-}
-
-
-// ==========================================
-// KIRIM VOTE
-// ==========================================
+/* =========================
+   SEND VOTE
+========================= */
 
 async function sendVote() {
 
     if (!supportBtn) return;
 
 
-    // Cegah vote kedua dari browser yang sama
-
     if (hasVoted()) {
 
-        setAlreadyVoted();
+        showAlreadyVoted();
 
         return;
 
     }
 
 
-    // Disable tombol sementara
-
     supportBtn.disabled = true;
 
-    supportBtn.textContent = "⏳ Mengirim...";
+    supportBtn.textContent =
+        "⏳ Mengirim...";
 
 
     try {
 
-        // Gunakan RPC Supabase.
-        // Ini menambah count langsung di database
-        // sehingga lebih aman daripada read → update.
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .rpc("increment_vote");
 
-        const { data, error } = await supabaseClient
-            .rpc("increment_vote");
-
-
-        // Kalau gagal
 
         if (error) {
 
-            console.error("Vote gagal:", error);
+            console.error(
+                "Vote gagal:",
+                error
+            );
 
-            supportBtn.disabled = false;
+            supportBtn.disabled =
+                false;
 
-            supportBtn.textContent = "❤️ Dukung Azriel";
+            supportBtn.textContent =
+                "❤️ Dukung Azriel";
 
-            alert(
-                "Vote gagal dikirim.\n\n" +
-                "Coba lagi beberapa saat."
+            showToast(
+                "Vote gagal dikirim."
             );
 
             return;
-        }
-
-
-        // Ambil hasil jumlah vote terbaru
-
-        const newCount = Number(data);
-
-
-        // Update angka di halaman
-
-        if (supportCount) {
-
-            supportCount.textContent =
-                newCount.toLocaleString("id-ID");
 
         }
 
 
-        // Simpan status vote di browser
+        updateVoteDisplay(
+            data
+        );
+
 
         localStorage.setItem(
             "azrielVoted",
@@ -262,36 +717,38 @@ async function sendVote() {
         );
 
 
-        // Ubah tombol
-
         supportBtn.textContent =
             "✓ Terima kasih!";
+
 
         supportBtn.classList.add(
             "supported"
         );
 
 
-        // Animasi hati
-
         createHeartAnimation();
+
+
+        showToast(
+            "Dukungan berhasil dikirim ❤️"
+        );
 
 
     } catch (error) {
 
         console.error(
-            "Terjadi kesalahan saat vote:",
+            "Supabase error:",
             error
         );
 
-        supportBtn.disabled = false;
+        supportBtn.disabled =
+            false;
 
         supportBtn.textContent =
             "❤️ Dukung Azriel";
 
-        alert(
-            "Terjadi kesalahan.\n\n" +
-            "Silakan coba lagi."
+        showToast(
+            "Terjadi kesalahan."
         );
 
     }
@@ -299,9 +756,9 @@ async function sendVote() {
 }
 
 
-// ==========================================
-// EVENT TOMBOL VOTE
-// ==========================================
+/* =========================
+   VOTE BUTTON
+========================= */
 
 if (supportBtn) {
 
@@ -313,19 +770,154 @@ if (supportBtn) {
 }
 
 
-// ==========================================
-// LOAD VOTE SAAT WEBSITE DIBUKA
-// ==========================================
+/* =========================
+   SHARE
+========================= */
+
+const shareBtn =
+    document.getElementById(
+        "shareBtn"
+    );
+
+
+if (shareBtn) {
+
+    shareBtn.addEventListener(
+        "click",
+        async () => {
+
+            const shareData = {
+
+                title:
+                    "Azriel For OSIS",
+
+                text:
+                    "Dukung Azriel sebagai calon Ketua OSIS 2026! #AzrielForOSIS",
+
+                url:
+                    "https://darooo14.github.io/WEB-AZRIEL/"
+
+            };
+
+
+            try {
+
+                if (navigator.share) {
+
+                    await navigator.share(
+                        shareData
+                    );
+
+                } else {
+
+                    await navigator.clipboard.writeText(
+                        shareData.url
+                    );
+
+                    showToast(
+                        "Link campaign disalin ✓"
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Share dibatalkan."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   COPY HASHTAG
+========================= */
+
+const copyBtn =
+    document.getElementById(
+        "copyBtn"
+    );
+
+
+if (copyBtn) {
+
+    copyBtn.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    "#AzrielForOSIS"
+                );
+
+                showToast(
+                    "#AzrielForOSIS berhasil disalin ✓"
+                );
+
+            } catch (error) {
+
+                showToast(
+                    "Gagal menyalin hashtag."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
 
 loadVotes();
 
 
-// ==========================================
-// CEK STATUS VOTE
-// ==========================================
-
 if (hasVoted()) {
 
-    setAlreadyVoted();
+    showAlreadyVoted();
 
 }
+
+
+/* =========================
+   AUTO REFRESH VOTE
+========================= */
+
+setInterval(() => {
+
+    loadVotes();
+
+}, 30000);
+
+
+/* =========================
+   IMAGE ERROR CHECK
+========================= */
+
+document
+    .querySelectorAll("img")
+    .forEach(img => {
+
+        img.addEventListener(
+            "error",
+            () => {
+
+                console.warn(
+                    "Gambar tidak ditemukan:",
+                    img.src
+                );
+
+            }
+        );
+
+    });
+```
