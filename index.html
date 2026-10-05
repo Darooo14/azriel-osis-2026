@@ -1,1829 +1,3129 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Azriel — Calon Ketua OSIS 2026</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --bg: #050505;
-            --bg2: #0b0b0b;
-            --card: rgba(255,255,255,0.055);
-            --card-hover: rgba(255,255,255,0.09);
-            --text: #ffffff;
-            --muted: #a8a8a8;
-            --border: rgba(255,255,255,0.1);
-            --accent: #ffffff;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 25%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent 25%),
-                var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.13;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 45px 45px;
-            mask-image: linear-gradient(to bottom, black, transparent 80%);
-            z-index: -1;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        section {
-            width: min(1180px, 90%);
-            margin: auto;
-            padding: 110px 0;
-            scroll-margin-top: 80px;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            z-index: 1000;
-            border-bottom: 1px solid transparent;
-            transition: 0.3s;
-        }
-
-        nav.scrolled {
-            background: rgba(5,5,5,0.82);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 3px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: 14px;
-            color: #aaa;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        .nav-support {
-            padding: 10px 17px;
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 999px;
-            color: white !important;
-        }
-
-        .nav-support:hover {
-            background: white;
-            color: black !important;
-        }
-
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 26px;
-            cursor: pointer;
-        }
-
-        .hero {
-            min-height: 100vh;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            align-items: center;
-            gap: 70px;
-            padding: 120px 7% 70px;
-        }
-
-        .badge {
-            display: inline-block;
-            border: 1px solid var(--border);
-            padding: 9px 15px;
-            border-radius: 999px;
-            color: #ccc;
-            font-size: 13px;
-            margin-bottom: 25px;
-            background: rgba(255,255,255,0.03);
-        }
-
-        .hero h1 {
-            font-size: clamp(60px, 9vw, 130px);
-            line-height: 0.86;
-            letter-spacing: -7px;
-            font-weight: 900;
-        }
-
-        .hero h1 span {
-            display: block;
-            color: transparent;
-            -webkit-text-stroke: 1px white;
-        }
-
-        .hero-text {
-            max-width: 620px;
-            margin-top: 30px;
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--muted);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            margin-top: 35px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 22px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: white;
-            color: black;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.15);
-        }
-
-        .btn-secondary {
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: black;
-            transform: translateY(-3px);
-        }
-
-        .hero-image {
-            position: relative;
-        }
-
-        .hero-image::before {
-            content: "";
-            position: absolute;
-            inset: -25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 35px;
-            transform: rotate(4deg);
-            z-index: -1;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-height: 680px;
-            object-fit: cover;
-            border-radius: 28px;
-            display: block;
-            filter: grayscale(15%);
-            box-shadow: 0 30px 100px rgba(0,0,0,0.55);
-        }
-
-        .section-label {
-            color: #777;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: clamp(38px, 6vw, 76px);
-            line-height: 0.95;
-            letter-spacing: -3px;
-            margin-bottom: 25px;
-        }
-
-        .section-description {
-            max-width: 720px;
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 17px;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 70px;
-            align-items: center;
-        }
-
-        .about-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .info-card {
-            padding: 25px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            background: var(--card-hover);
-        }
-
-        .info-card small {
-            color: #777;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .info-card strong {
-            font-size: 17px;
-        }
-
-        .visi-box {
-            margin-top: 45px;
-            padding: 55px;
-            border: 1px solid var(--border);
-            background: linear-gradient(
-                135deg,
-                rgba(255,255,255,0.08),
-                rgba(255,255,255,0.025)
-            );
-            border-radius: 30px;
-        }
-
-        .visi-box p {
-            font-size: clamp(25px, 4vw, 48px);
-            line-height: 1.2;
-            font-weight: 700;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-top: 50px;
-        }
-
-        .card {
-            padding: 32px;
-            min-height: 210px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            border-radius: 24px;
-            transition: 0.35s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            right: -50px;
-            bottom: -50px;
-            background: white;
-            opacity: 0.04;
-            border-radius: 50%;
-            transition: 0.4s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(255,255,255,0.22);
-        }
-
-        .card:hover::after {
-            transform: scale(2);
-        }
-
-        .number {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 35px;
-        }
-
-        .card h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .program-icon {
-            font-size: 32px;
-            margin-bottom: 25px;
-        }
-
-        .reason {
-            text-align: center;
-            padding: 140px 20px;
-        }
-
-        .reason p {
-            max-width: 900px;
-            margin: 35px auto 0;
-            font-size: clamp(27px, 4vw, 55px);
-            line-height: 1.2;
-            font-weight: 800;
-        }
-
-        .reason span {
-            color: #777;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
-            grid-auto-rows: 260px;
-            gap: 14px;
-            margin-top: 50px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            background: #111;
-        }
-
-        .gallery-item:first-child {
-            grid-row: span 2;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.6s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.06);
-        }
-
-        .poster {
-            margin-top: 70px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .poster img {
-            width: 100%;
-            border-radius: 25px;
-            border: 1px solid var(--border);
-        }
-
-        .support-section {
-            text-align: center;
-        }
-
-        .support-box {
-            margin-top: 45px;
-            padding: 70px 30px;
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 35px;
-            background:
-                radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 55%),
-                rgba(255,255,255,0.025);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .support-box h3 {
-            font-size: clamp(34px, 5vw, 65px);
-            margin-bottom: 15px;
-            letter-spacing: -3px;
-        }
-
-        .support-box p {
-            color: var(--muted);
-            margin-bottom: 35px;
-        }
-
-        .support-count {
-            font-size: 60px;
-            font-weight: 900;
-            margin-bottom: 25px;
-        }
-
-        .support-count small {
-            display: block;
-            color: #777;
-            font-size: 13px;
-            font-weight: normal;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .support-btn {
-            border: none;
-            background: white;
-            color: black;
-            padding: 17px 30px;
-            border-radius: 999px;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .support-btn:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(255,255,255,0.18);
-        }
-
-        .support-btn:active {
-            transform: scale(0.96);
-        }
-
-        .support-btn.supported {
-            background: #222;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .heart-pop {
-            position: absolute;
-            font-size: 28px;
-            pointer-events: none;
-            animation: heartFloat 1s ease-out forwards;
-        }
-
-        @keyframes heartFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(0.6);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(-130px) scale(1.5);
-            }
-        }
-
-        .cta {
-            text-align: center;
-            padding: 130px 20px;
-        }
-
-        .cta h2 {
-            font-size: clamp(55px, 10vw, 130px);
-            line-height: 0.85;
-            letter-spacing: -7px;
-        }
-
-        .cta h2 span {
-            color: transparent;
-            -webkit-text-stroke: 1px white;
-        }
-
-        .cta p {
-            margin-top: 35px;
-            color: #888;
-        }
-
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 35px 5%;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            color: #777;
-            font-size: 13px;
-        }
-
-        #topBtn {
-            position: fixed;
-            right: 25px;
-            bottom: 25px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            background: rgba(10,10,10,0.8);
-            color: white;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.3s;
-            z-index: 999;
-            backdrop-filter: blur(10px);
-        }
-
-        #topBtn.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 900px) {
-
-            .hero {
-                grid-template-columns: 1fr;
-                padding-top: 130px;
-            }
-
-            .hero-image {
-                max-width: 650px;
-                width: 100%;
-                margin: auto;
-            }
-
-            .about-grid,
-            .poster {
-                grid-template-columns: 1fr;
-            }
-
-            .cards {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .gallery-item:first-child {
-                grid-row: span 1;
-            }
-
-            .nav-links {
-                position: absolute;
-                top: 72px;
-                left: 0;
-                width: 100%;
-                display: none;
-                flex-direction: column;
-                padding: 25px;
-                background: rgba(5,5,5,0.96);
-                border-bottom: 1px solid var(--border);
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            section {
-                width: 88%;
-                padding: 80px 0;
-            }
-
-            .hero {
-                padding-left: 6%;
-                padding-right: 6%;
-                gap: 45px;
-            }
-
-            .hero h1 {
-                font-size: 68px;
-                letter-spacing: -4px;
-            }
-
-            .hero-text {
-                font-size: 16px;
-            }
-
-            .about-info {
-                grid-template-columns: 1fr;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-                grid-auto-rows: 300px;
-            }
-
-            .visi-box,
-            .support-box {
-                padding: 40px 25px;
-            }
-
-            .cta h2 {
-                font-size: 65px;
-                letter-spacing: -4px;
-            }
-
-            footer {
-                flex-direction: column;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Azriel — Calon Ketua OSIS 2026</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+:root{
+    --bg:#050505;
+    --bg2:#0b0b0b;
+    --card:rgba(255,255,255,.055);
+    --card-hover:rgba(255,255,255,.09);
+    --text:#fff;
+    --muted:#a8a8a8;
+    --border:rgba(255,255,255,.1);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(255,255,255,.08),transparent 25%),
+        radial-gradient(circle at 80% 20%,rgba(255,255,255,.05),transparent 25%),
+        var(--bg);
+    color:white;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.13;
+    background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:45px 45px;
+    mask-image:linear-gradient(to bottom,black,transparent 80%);
+    z-index:-1;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+section{
+    width:min(1180px,90%);
+    margin:auto;
+    padding:110px 0;
+    scroll-margin-top:80px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    z-index:1000;
+    border-bottom:1px solid transparent;
+    transition:.3s;
+}
+
+nav.scrolled{
+    background:rgba(5,5,5,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+.nav-links{
+    display:flex;
+    gap:24px;
+    align-items:center;
+}
+
+.nav-links a{
+    font-size:14px;
+    color:#aaa;
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:white;
+}
+
+.nav-links a.active{
+    text-shadow:0 0 15px rgba(255,255,255,.5);
+}
+
+.nav-support{
+    padding:10px 17px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:999px;
+    color:white!important;
+}
+
+.nav-support:hover{
+    background:white;
+    color:black!important;
+}
+
+.menu-btn{
+    display:none;
+    background:none;
+    border:none;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    width:100%;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:70px;
+    padding:120px 7% 70px;
+}
+
+.badge{
+    display:inline-block;
+    border:1px solid var(--border);
+    padding:9px 15px;
+    border-radius:999px;
+    color:#ccc;
+    font-size:13px;
+    margin-bottom:25px;
+    background:rgba(255,255,255,.03);
+}
+
+.live-dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:white;
+    margin-right:7px;
+    box-shadow:0 0 12px white;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.3;
+        transform:scale(.7);
+    }
+}
+
+.hero h1{
+    font-size:clamp(60px,9vw,130px);
+    line-height:.86;
+    letter-spacing:-7px;
+    font-weight:900;
+}
+
+.hero h1 span{
+    display:block;
+    color:transparent;
+    -webkit-text-stroke:1px white;
+}
+
+.hero-text{
+    max-width:620px;
+    margin-top:30px;
+    font-size:18px;
+    line-height:1.7;
+    color:var(--muted);
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 22px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    font-weight:700;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.btn-primary{
+    background:white;
+    color:black;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(255,255,255,.15);
+}
+
+.btn-secondary{
+    color:white;
+}
+
+.btn-secondary:hover{
+    background:white;
+    color:black;
+    transform:translateY(-3px);
+}
+
+.hero-image{
+    position:relative;
+}
+
+.hero-image::before{
+    content:"";
+    position:absolute;
+    inset:-25px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:35px;
+    transform:rotate(4deg);
+    z-index:-1;
+}
+
+.hero-image img{
+    width:100%;
+    max-height:680px;
+    object-fit:cover;
+    border-radius:28px;
+    display:block;
+    filter:grayscale(15%);
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.section-label{
+    color:#777;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.section-title{
+    font-size:clamp(38px,6vw,76px);
+    line-height:.95;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+}
+
+.section-description{
+    max-width:720px;
+    color:var(--muted);
+    line-height:1.8;
+    font-size:17px;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.info-card{
+    padding:25px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-5px);
+    background:var(--card-hover);
+}
+
+.info-card small{
+    color:#777;
+    display:block;
+    margin-bottom:10px;
+}
+
+.info-card strong{
+    font-size:17px;
+}
+
+.visi-box{
+    margin-top:45px;
+    padding:55px;
+    border:1px solid var(--border);
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.025)
+    );
+    border-radius:30px;
+}
+
+.visi-box p{
+    font-size:clamp(25px,4vw,48px);
+    line-height:1.2;
+    font-weight:700;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:50px;
+}
+
+.card{
+    padding:32px;
+    min-height:210px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:24px;
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:-50px;
+    bottom:-50px;
+    background:white;
+    opacity:.04;
+    border-radius:50%;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:var(--card-hover);
+    border-color:rgba(255,255,255,.22);
+}
+
+.card:hover::after{
+    transform:scale(2);
+}
+
+.number{
+    color:#777;
+    font-size:13px;
+    margin-bottom:35px;
+}
+
+.card h3{
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.program-icon{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:45px;
+}
+
+.stat-box{
+    padding:30px 20px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:var(--card);
+    text-align:center;
+    transition:.3s;
+}
+
+.stat-box:hover{
+    transform:translateY(-6px);
+    background:var(--card-hover);
+}
+
+.stat-number{
+    font-size:42px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:#777;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-top:8px;
+}
+
+/* =========================
+   REASON
+========================= */
+
+.reason{
+    text-align:center;
+    padding:140px 20px;
+}
+
+.reason p{
+    max-width:900px;
+    margin:35px auto 0;
+    font-size:clamp(27px,4vw,55px);
+    line-height:1.2;
+    font-weight:800;
+}
+
+.reason span{
+    color:#777;
+}
+
+/* =========================
+   ROADMAP
+========================= */
+
+.roadmap{
+    margin-top:50px;
+    display:grid;
+    gap:15px;
+}
+
+.roadmap-item{
+    display:grid;
+    grid-template-columns:100px 1fr auto;
+    align-items:center;
+    gap:25px;
+    padding:25px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.roadmap-item:hover{
+    transform:translateX(6px);
+    background:var(--card-hover);
+}
+
+.roadmap-number{
+    font-size:13px;
+    color:#777;
+    letter-spacing:2px;
+}
+
+.roadmap-item h3{
+    margin-bottom:6px;
+}
+
+.roadmap-item p{
+    color:#888;
+    line-height:1.5;
+}
+
+.roadmap-tag{
+    padding:7px 12px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    font-size:11px;
+    color:#aaa;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    grid-auto-rows:260px;
+    gap:14px;
+    margin-top:50px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:#111;
+}
+
+.gallery-item:first-child{
+    grid-row:span 2;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.06);
+}
+
+/* =========================
+   POSTER
+========================= */
+
+.poster{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+.poster img{
+    width:100%;
+    border-radius:25px;
+    border:1px solid var(--border);
+}
+
+/* =========================
+   QR CODE
+========================= */
+
+.qr-box{
+    margin-top:50px;
+    padding:45px;
+    border:1px solid var(--border);
+    border-radius:30px;
+    background:
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(255,255,255,.08),
+            transparent 45%
+        ),
+        var(--card);
+    overflow:hidden;
+}
+
+.qr-content{
+    display:grid;
+    grid-template-columns:1fr 300px;
+    align-items:center;
+    gap:50px;
+}
+
+.qr-badge{
+    display:inline-block;
+    padding:8px 13px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    color:#aaa;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.qr-text h3{
+    font-size:clamp(40px,6vw,75px);
+    line-height:.85;
+    letter-spacing:-4px;
+}
+
+.qr-text h3 span{
+    color:transparent;
+    -webkit-text-stroke:1px white;
+}
+
+.qr-text p{
+    color:#999;
+    line-height:1.7;
+    max-width:500px;
+    margin:25px 0;
+}
+
+.qr-code-wrapper{
+    background:white;
+    padding:22px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+#qrcode{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#qrcode img{
+    width:100%!important;
+    height:auto!important;
+    max-width:250px;
+    display:block;
+}
+
+.qr-code-wrapper small{
+    display:block;
+    color:#111;
+    font-weight:900;
+    letter-spacing:3px;
+    font-size:10px;
+    margin-top:12px;
+}
+
+/* =========================
+   ASPIRASI
+========================= */
+
+.aspiration-box{
+    margin-top:45px;
+    padding:35px;
+    border:1px solid var(--border);
+    border-radius:28px;
+    background:var(--card);
+}
+
+.aspiration-box textarea{
+    width:100%;
+    min-height:150px;
+    resize:vertical;
+    background:#080808;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    outline:none;
+    font:inherit;
+    line-height:1.6;
+}
+
+.aspiration-box textarea:focus{
+    border-color:rgba(255,255,255,.4);
+}
+
+.aspiration-bottom{
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.char-count{
+    color:#666;
+    font-size:13px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    margin-top:45px;
+    display:grid;
+    gap:12px;
+}
+
+.faq-item{
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    background:var(--card);
+}
+
+.faq-question{
+    width:100%;
+    padding:22px;
+    background:none;
+    color:white;
+    border:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align:left;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.faq-icon{
+    font-size:20px;
+    transition:.3s;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:.4s ease;
+}
+
+.faq-answer p{
+    padding:0 22px 22px;
+    color:#999;
+    line-height:1.7;
+}
+
+.faq-item.open .faq-answer{
+    max-height:300px;
+}
+
+.faq-item.open .faq-icon{
+    transform:rotate(45deg);
+}
+
+/* =========================
+   SUPPORT
+========================= */
+
+.support-section{
+    text-align:center;
+}
+
+.support-box{
+    margin-top:45px;
+    padding:70px 30px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:35px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.08),
+            transparent 55%
+        ),
+        rgba(255,255,255,.025);
+    position:relative;
+    overflow:hidden;
+}
+
+.support-box h3{
+    font-size:clamp(34px,5vw,65px);
+    margin-bottom:15px;
+    letter-spacing:-3px;
+}
+
+.support-box p{
+    color:var(--muted);
+    margin-bottom:35px;
+}
+
+.support-count{
+    font-size:60px;
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+.support-count small{
+    display:block;
+    color:#777;
+    font-size:13px;
+    font-weight:normal;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.support-btn{
+    border:none;
+    background:white;
+    color:black;
+    padding:17px 30px;
+    border-radius:999px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.support-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 20px 50px rgba(255,255,255,.18);
+}
+
+.support-btn:active{
+    transform:scale(.96);
+}
+
+.support-btn.supported{
+    background:#222;
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+}
+
+.progress-wrap{
+    width:min(600px,90%);
+    height:8px;
+    background:#1b1b1b;
+    border-radius:999px;
+    margin:30px auto 10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:white;
+    border-radius:999px;
+    transition:width .8s ease;
+}
+
+.progress-text{
+    color:#666;
+    font-size:12px;
+}
+
+.heart-pop{
+    position:absolute;
+    font-size:28px;
+    pointer-events:none;
+    animation:heartFloat 1s ease-out forwards;
+}
+
+@keyframes heartFloat{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(.6);
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-130px) scale(1.5);
+    }
+}
+
+/* =========================
+   SHARE
+========================= */
+
+.share-area{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.share-btn{
+    padding:12px 18px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.share-btn:hover{
+    background:white;
+    color:black;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:30px;
+    transform:translate(-50%,30px);
+    background:white;
+    color:black;
+    padding:14px 20px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    opacity:0;
+    pointer-events:none;
+    transition:.35s;
+    z-index:10000;
+    box-shadow:0 15px 50px rgba(0,0,0,.4);
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    text-align:center;
+    padding:130px 20px;
+}
+
+.cta h2{
+    font-size:clamp(55px,10vw,130px);
+    line-height:.85;
+    letter-spacing:-7px;
+}
+
+.cta h2 span{
+    color:transparent;
+    -webkit-text-stroke:1px white;
+}
+
+.cta p{
+    margin-top:35px;
+    color:#888;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:35px 5%;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    color:#777;
+    font-size:13px;
+}
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+#topBtn{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:rgba(10,10,10,.8);
+    color:white;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:999;
+    backdrop-filter:blur(10px);
+}
+
+#topBtn.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:130px;
+    }
+
+    .hero-image{
+        max-width:650px;
+        width:100%;
+        margin:auto;
+    }
+
+    .about-grid,
+    .poster{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery-item:first-child{
+        grid-row:span 1;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .qr-content{
+        grid-template-columns:1fr;
+    }
+
+    .qr-text{
+        text-align:center;
+    }
+
+    .qr-text p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .qr-code-wrapper{
+        width:300px;
+        margin:auto;
+    }
+
+    .roadmap-item{
+        grid-template-columns:70px 1fr;
+    }
+
+    .roadmap-tag{
+        grid-column:2;
+        width:max-content;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:72px;
+        left:0;
+        width:100%;
+        display:none;
+        flex-direction:column;
+        padding:25px;
+        background:rgba(5,5,5,.96);
+        border-bottom:1px solid var(--border);
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        width:88%;
+        padding:80px 0;
+    }
+
+    .hero{
+        padding-left:6%;
+        padding-right:6%;
+        gap:45px;
+    }
+
+    .hero h1{
+        font-size:68px;
+        letter-spacing:-4px;
+    }
+
+    .hero-text{
+        font-size:16px;
+    }
+
+    .about-info{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+        grid-auto-rows:300px;
+    }
+
+    .visi-box,
+    .support-box,
+    .aspiration-box,
+    .qr-box{
+        padding:40px 25px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat-number{
+        font-size:32px;
+    }
+
+    .roadmap-item{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .roadmap-tag{
+        grid-column:auto;
+    }
+
+    .aspiration-bottom{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .qr-code-wrapper{
+        width:250px;
+    }
+
+    .cta h2{
+        font-size:65px;
+        letter-spacing:-4px;
+    }
+
+    footer{
+        flex-direction:column;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-    <nav id="navbar">
+<nav id="navbar">
 
-        <a href="#home" class="logo">AZRIEL.</a>
+<a href="#home" class="logo">AZRIEL.</a>
 
-        <div class="nav-links" id="navLinks">
-            <a href="#about">Tentang</a>
-            <a href="#visi">Visi</a>
-            <a href="#misi">Misi</a>
-            <a href="#program">Program</a>
-            <a href="#galeri">Galeri</a>
-            <a href="#support" class="nav-support">Dukung Azriel</a>
-        </div>
+<div class="nav-links" id="navLinks">
 
-        <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
-            ☰
-        </button>
+<a href="#about">Tentang</a>
+<a href="#visi">Visi</a>
+<a href="#misi">Misi</a>
+<a href="#program">Program</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#galeri">Galeri</a>
+<a href="#qr">QR</a>
+<a href="#support" class="nav-support">Dukung Azriel</a>
 
-    </nav>
+</div>
 
+<button class="menu-btn" id="menuBtn">
+☰
+</button>
 
-    <!-- =========================
-         HERO
-    ========================= -->
+</nav>
 
-    <header class="hero" id="home">
 
-        <div class="hero-content reveal">
+<!-- =========================
+     HERO
+========================= -->
 
-            <div class="badge">
-                Calon Ketua OSIS 2026
-            </div>
+<header class="hero" id="home">
 
-            <h1>
-                AZRIEL
-                <span>FOR OSIS.</span>
-            </h1>
+<div class="hero-content reveal">
 
-            <p class="hero-text">
-                Bersama membangun sekolah yang lebih aktif,
-                kreatif, solid, dan penuh kesempatan untuk berkembang.
-            </p>
+<div class="badge">
+<span class="live-dot"></span>
+Calon Ketua OSIS 2026 — Campaign Aktif
+</div>
 
-            <div class="hero-buttons">
+<h1>
+AZRIEL
+<span>FOR OSIS.</span>
+</h1>
 
-                <a href="#visi" class="btn btn-primary">
-                    Lihat Visi & Misi
-                </a>
+<p class="hero-text">
+Bersama membangun sekolah yang lebih aktif,
+kreatif, solid, dan penuh kesempatan untuk berkembang.
+</p>
 
-                <a href="#program" class="btn btn-secondary">
-                    Program Kerja →
-                </a>
+<div class="hero-buttons">
 
-            </div>
+<a href="#visi" class="btn btn-primary">
+Lihat Visi & Misi
+</a>
 
-        </div>
+<a href="#program" class="btn btn-secondary">
+Program Kerja →
+</a>
 
+</div>
 
-        <div class="hero-image reveal">
+</div>
 
-            <img
-                src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
-                alt="Azriel Calon Ketua OSIS"
-            >
+<div class="hero-image reveal">
 
-        </div>
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
+alt="Azriel Calon Ketua OSIS"
+>
 
-    </header>
+</div>
 
+</header>
 
-    <!-- =========================
-         TENTANG
-    ========================= -->
 
-    <section id="about">
+<!-- =========================
+     TENTANG
+========================= -->
 
-        <div class="about-grid">
+<section id="about">
 
-            <div class="reveal">
+<div class="about-grid">
 
-                <div class="section-label">
-                    01 — Tentang
-                </div>
+<div class="reveal">
 
-                <h2 class="section-title">
-                    Kenal lebih dekat dengan Azriel.
-                </h2>
+<div class="section-label">
+01 — Tentang
+</div>
 
-                <p class="section-description">
-                    Azriel hadir sebagai calon Ketua OSIS dengan semangat
-                    untuk membuat organisasi siswa menjadi lebih aktif,
-                    terbuka, kreatif, dan dekat dengan seluruh siswa.
-                </p>
+<h2 class="section-title">
+Kenal lebih dekat dengan Azriel.
+</h2>
 
-                <br>
+<p class="section-description">
+Azriel hadir sebagai calon Ketua OSIS dengan semangat
+untuk membuat organisasi siswa menjadi lebih aktif,
+terbuka, kreatif, dan dekat dengan seluruh siswa.
+</p>
 
-                <p class="section-description">
-                    Bukan hanya tentang menjadi pemimpin,
-                    tetapi tentang bagaimana kita bisa bergerak
-                    bersama dan membuat perubahan positif di sekolah.
-                </p>
+<br>
 
-            </div>
+<p class="section-description">
+Bukan hanya tentang menjadi pemimpin,
+tetapi tentang bagaimana kita bisa bergerak
+bersama dan membuat perubahan positif di sekolah.
+</p>
 
+</div>
 
-            <div class="about-info reveal">
+<div class="about-info reveal">
 
-                <div class="info-card">
-                    <small>POSISI</small>
-                    <strong>Calon Ketua OSIS</strong>
-                </div>
+<div class="info-card">
+<small>POSISI</small>
+<strong>Calon Ketua OSIS</strong>
+</div>
 
-                <div class="info-card">
-                    <small>PERIODE</small>
-                    <strong>2026 / 2027</strong>
-                </div>
+<div class="info-card">
+<small>PERIODE</small>
+<strong>2026 / 2027</strong>
+</div>
 
-                <div class="info-card">
-                    <small>FOKUS</small>
-                    <strong>Kreativitas & Kebersamaan</strong>
-                </div>
+<div class="info-card">
+<small>FOKUS</small>
+<strong>Kreativitas & Kebersamaan</strong>
+</div>
 
-                <div class="info-card">
-                    <small>KOMITMEN</small>
-                    <strong>Bergerak Bersama</strong>
-                </div>
+<div class="info-card">
+<small>KOMITMEN</small>
+<strong>Bergerak Bersama</strong>
+</div>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </section>
+</section>
 
 
-    <!-- =========================
-         VISI
-    ========================= -->
+<!-- =========================
+     CAMPAIGN STATS
+========================= -->
 
-    <section id="visi">
+<section>
 
-        <div class="reveal">
+<div class="reveal">
 
-            <div class="section-label">
-                02 — Visi
-            </div>
+<div class="section-label">
+Campaign Overview
+</div>
 
-            <h2 class="section-title">
-                Satu visi.<br>
-                Satu langkah.
-            </h2>
+<h2 class="section-title">
+Satu gerakan.<br>
+Banyak energi.
+</h2>
 
-            <p class="section-description">
-                Membangun OSIS yang mampu menjadi wadah bagi seluruh
-                siswa untuk berkembang, berkreasi, menyampaikan aspirasi,
-                dan menciptakan lingkungan sekolah yang lebih positif.
-            </p>
+<p class="section-description">
+Perjalanan ini dibangun dari visi, misi, program,
+dan dukungan seluruh siswa.
+</p>
 
-        </div>
+</div>
 
+<div class="stats-grid">
 
-        <div class="visi-box reveal">
+<div class="stat-box reveal">
+<div class="stat-number">06</div>
+<div class="stat-label">Misi</div>
+</div>
 
-            <p>
-                “Menjadikan OSIS sebagai wadah yang aktif,
-                inovatif, aspiratif, dan mampu mempererat
-                kebersamaan seluruh siswa.”
-            </p>
+<div class="stat-box reveal">
+<div class="stat-number">06</div>
+<div class="stat-label">Program</div>
+</div>
 
-        </div>
+<div class="stat-box reveal">
+<div class="stat-number">27</div>
+<div class="stat-label">Periode</div>
+</div>
 
-    </section>
+<div class="stat-box reveal">
+<div class="stat-number" id="statVotes">
+0
+</div>
+<div class="stat-label">Dukungan</div>
+</div>
 
+</div>
 
-    <!-- =========================
-         MISI
-    ========================= -->
+</section>
 
-    <section id="misi">
 
-        <div class="reveal">
+<!-- =========================
+     VISI
+========================= -->
 
-            <div class="section-label">
-                03 — Misi
-            </div>
+<section id="visi">
 
-            <h2 class="section-title">
-                Bergerak dengan tujuan.
-            </h2>
+<div class="reveal">
 
-            <p class="section-description">
-                Beberapa langkah yang ingin diwujudkan bersama
-                untuk membuat lingkungan sekolah menjadi lebih aktif
-                dan menyenangkan.
-            </p>
+<div class="section-label">
+02 — Visi
+</div>
 
-        </div>
+<h2 class="section-title">
+Satu visi.<br>
+Satu langkah.
+</h2>
 
+<p class="section-description">
+Membangun OSIS yang mampu menjadi wadah bagi seluruh
+siswa untuk berkembang, berkreasi, menyampaikan aspirasi,
+dan menciptakan lingkungan sekolah yang lebih positif.
+</p>
 
-        <div class="cards">
+</div>
 
-            <div class="card reveal">
+<div class="visi-box reveal">
 
-                <div class="number">
-                    01
-                </div>
+<p>
+“Menjadikan OSIS sebagai wadah yang aktif,
+inovatif, aspiratif, dan mampu mempererat
+kebersamaan seluruh siswa.”
+</p>
 
-                <h3>
-                    Meningkatkan Kebersamaan
-                </h3>
+</div>
 
-                <p>
-                    Membangun rasa kebersamaan antar siswa
-                    melalui kegiatan positif dan kolaboratif.
-                </p>
+</section>
 
-            </div>
 
+<!-- =========================
+     MISI
+========================= -->
 
-            <div class="card reveal">
+<section id="misi">
 
-                <div class="number">
-                    02
-                </div>
+<div class="reveal">
 
-                <h3>
-                    Menampung Aspirasi
-                </h3>
+<div class="section-label">
+03 — Misi
+</div>
 
-                <p>
-                    Membuka ruang bagi siswa untuk menyampaikan
-                    ide, kritik, dan masukan.
-                </p>
+<h2 class="section-title">
+Bergerak dengan tujuan.
+</h2>
 
-            </div>
+<p class="section-description">
+Beberapa langkah yang ingin diwujudkan bersama
+untuk membuat lingkungan sekolah menjadi lebih aktif
+dan menyenangkan.
+</p>
 
+</div>
 
-            <div class="card reveal">
+<div class="cards">
 
-                <div class="number">
-                    03
-                </div>
+<div class="card reveal">
+<div class="number">01</div>
+<h3>Meningkatkan Kebersamaan</h3>
+<p>
+Membangun rasa kebersamaan antar siswa
+melalui kegiatan positif dan kolaboratif.
+</p>
+</div>
 
-                <h3>
-                    Mengembangkan Kreativitas
-                </h3>
+<div class="card reveal">
+<div class="number">02</div>
+<h3>Menampung Aspirasi</h3>
+<p>
+Membuka ruang bagi siswa untuk menyampaikan
+ide, kritik, dan masukan.
+</p>
+</div>
 
-                <p>
-                    Mendorong siswa untuk berani berkarya,
-                    mencoba hal baru, dan menunjukkan potensinya.
-                </p>
+<div class="card reveal">
+<div class="number">03</div>
+<h3>Mengembangkan Kreativitas</h3>
+<p>
+Mendorong siswa untuk berani berkarya,
+mencoba hal baru, dan menunjukkan potensinya.
+</p>
+</div>
 
-            </div>
+<div class="card reveal">
+<div class="number">04</div>
+<h3>Menciptakan Kegiatan Positif</h3>
+<p>
+Menghadirkan kegiatan sekolah yang menarik,
+edukatif, dan menyenangkan.
+</p>
+</div>
 
+<div class="card reveal">
+<div class="number">05</div>
+<h3>Meningkatkan Kedisiplinan</h3>
+<p>
+Membangun budaya disiplin dan tanggung jawab
+melalui contoh serta kegiatan yang positif.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="number">06</div>
+<h3>Bergerak Bersama</h3>
+<p>
+Menjadikan OSIS sebagai organisasi yang terbuka
+dan melibatkan seluruh siswa.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ALASAN
+========================= -->
+
+<section class="reason">
+
+<div class="section-label reveal">
+04 — Alasan
+</div>
+
+<h2 class="section-title reveal">
+Kenapa Azriel?
+</h2>
+
+<p class="reveal">
+“Karena perubahan tidak harus dimulai
+dari seseorang yang sempurna.
+<span>
+Perubahan dimulai dari seseorang
+yang mau bergerak.
+</span>”
+</p>
+
+</section>
 
-            <div class="card reveal">
+
+<!-- =========================
+     PROGRAM
+========================= -->
+
+<section id="program">
+
+<div class="reveal">
+
+<div class="section-label">
+05 — Program Kerja
+</div>
 
-                <div class="number">
-                    04
-                </div>
+<h2 class="section-title">
+Ide yang dibuat<br>
+untuk bergerak.
+</h2>
 
-                <h3>
-                    Menciptakan Kegiatan Positif
-                </h3>
+<p class="section-description">
+Program yang dirancang untuk membuat kehidupan
+sekolah lebih aktif, kreatif, dan melibatkan siswa.
+</p>
 
-                <p>
-                    Menghadirkan kegiatan sekolah yang menarik,
-                    edukatif, dan menyenangkan.
-                </p>
+</div>
+
+<div class="cards">
 
-            </div>
+<div class="card reveal">
+<div class="program-icon">🎨</div>
+<h3>Creative Day</h3>
+<p>
+Hari khusus untuk menampilkan kreativitas,
+seni, karya, dan bakat siswa.
+</p>
+</div>
 
+<div class="card reveal">
+<div class="program-icon">🏆</div>
+<h3>School Competition</h3>
+<p>
+Kompetisi antar siswa untuk meningkatkan
+semangat, sportivitas, dan kebersamaan.
+</p>
+</div>
 
-            <div class="card reveal">
+<div class="card reveal">
+<div class="program-icon">💡</div>
+<h3>Kotak Aspirasi</h3>
+<p>
+Wadah bagi siswa untuk menyampaikan
+ide, kritik, dan saran kepada OSIS.
+</p>
+</div>
 
-                <div class="number">
-                    05
-                </div>
+<div class="card reveal">
+<div class="program-icon">🤝</div>
+<h3>OSIS Connect</h3>
+<p>
+Membangun komunikasi yang lebih dekat
+antara OSIS dan seluruh siswa.
+</p>
+</div>
 
-                <h3>
-                    Meningkatkan Kedisiplinan
-                </h3>
+<div class="card reveal">
+<div class="program-icon">⚡</div>
+<h3>Event Sekolah</h3>
+<p>
+Mengembangkan kegiatan sekolah yang
+lebih seru, kreatif, dan berkesan.
+</p>
+</div>
 
-                <p>
-                    Membangun budaya disiplin dan tanggung jawab
-                    melalui contoh serta kegiatan yang positif.
-                </p>
+<div class="card reveal">
+<div class="program-icon">🌱</div>
+<h3>School Care</h3>
+<p>
+Mengajak siswa menjaga lingkungan sekolah
+agar tetap nyaman dan bersih.
+</p>
+</div>
 
-            </div>
+</div>
 
+</section>
 
-            <div class="card reveal">
 
-                <div class="number">
-                    06
-                </div>
+<!-- =========================
+     ROADMAP
+========================= -->
 
-                <h3>
-                    Bergerak Bersama
-                </h3>
+<section id="roadmap">
 
-                <p>
-                    Menjadikan OSIS sebagai organisasi yang terbuka
-                    dan melibatkan seluruh siswa.
-                </p>
+<div class="reveal">
 
-            </div>
+<div class="section-label">
+06 — Roadmap
+</div>
 
-        </div>
+<h2 class="section-title">
+Dari ide menjadi<br>
+gerakan.
+</h2>
 
-    </section>
+<p class="section-description">
+Setiap program dimulai dari mendengar,
+merencanakan, lalu bergerak bersama.
+</p>
 
+</div>
 
-    <!-- =========================
-         ALASAN
-    ========================= -->
+<div class="roadmap">
 
-    <section class="reason">
+<div class="roadmap-item reveal">
 
-        <div class="section-label reveal">
-            04 — Alasan
-        </div>
+<div class="roadmap-number">
+STEP 01
+</div>
 
-        <h2 class="section-title reveal">
-            Kenapa Azriel?
-        </h2>
+<div>
+<h3>Dengar Aspirasi</h3>
+<p>
+Mengumpulkan ide, kritik, dan kebutuhan siswa.
+</p>
+</div>
 
-        <p class="reveal">
-            “Karena perubahan tidak harus dimulai
-            dari seseorang yang sempurna.
-            <span>
-                Perubahan dimulai dari seseorang
-                yang mau bergerak.
-            </span>”
-        </p>
+<div class="roadmap-tag">
+LISTEN
+</div>
 
-    </section>
+</div>
 
 
-    <!-- =========================
-         PROGRAM KERJA
-    ========================= -->
+<div class="roadmap-item reveal">
 
-    <section id="program">
+<div class="roadmap-number">
+STEP 02
+</div>
 
-        <div class="reveal">
+<div>
+<h3>Susun Program</h3>
+<p>
+Mengubah aspirasi menjadi kegiatan yang realistis.
+</p>
+</div>
 
-            <div class="section-label">
-                05 — Program Kerja
-            </div>
+<div class="roadmap-tag">
+PLAN
+</div>
 
-            <h2 class="section-title">
-                Ide yang dibuat<br>
-                untuk bergerak.
-            </h2>
+</div>
 
-            <p class="section-description">
-                Program yang dirancang untuk membuat kehidupan
-                sekolah lebih aktif, kreatif, dan melibatkan siswa.
-            </p>
 
-        </div>
+<div class="roadmap-item reveal">
 
+<div class="roadmap-number">
+STEP 03
+</div>
 
-        <div class="cards">
+<div>
+<h3>Kolaborasi</h3>
+<p>
+Mengajak siswa ikut berperan dalam setiap kegiatan.
+</p>
+</div>
 
-            <div class="card reveal">
+<div class="roadmap-tag">
+TEAM
+</div>
 
-                <div class="program-icon">
-                    🎨
-                </div>
+</div>
 
-                <h3>
-                    Creative Day
-                </h3>
 
-                <p>
-                    Hari khusus untuk menampilkan kreativitas,
-                    seni, karya, dan bakat siswa.
-                </p>
+<div class="roadmap-item reveal">
 
-            </div>
+<div class="roadmap-number">
+STEP 04
+</div>
 
+<div>
+<h3>Eksekusi</h3>
+<p>
+Menjalankan program dengan tanggung jawab.
+</p>
+</div>
 
-            <div class="card reveal">
+<div class="roadmap-tag">
+ACTION
+</div>
 
-                <div class="program-icon">
-                    🏆
-                </div>
+</div>
 
-                <h3>
-                    School Competition
-                </h3>
 
-                <p>
-                    Kompetisi antar siswa untuk meningkatkan
-                    semangat, sportivitas, dan kebersamaan.
-                </p>
+<div class="roadmap-item reveal">
 
-            </div>
+<div class="roadmap-number">
+STEP 05
+</div>
 
+<div>
+<h3>Evaluasi</h3>
+<p>
+Melihat hasil dan terus memperbaiki apa yang kurang.
+</p>
+</div>
 
-            <div class="card reveal">
+<div class="roadmap-tag">
+IMPROVE
+</div>
 
-                <div class="program-icon">
-                    💡
-                </div>
+</div>
 
-                <h3>
-                    Kotak Aspirasi
-                </h3>
+</div>
 
-                <p>
-                    Wadah bagi siswa untuk menyampaikan
-                    ide, kritik, dan saran kepada OSIS.
-                </p>
+</section>
 
-            </div>
 
+<!-- =========================
+     GALERI
+========================= -->
 
-            <div class="card reveal">
+<section id="galeri">
 
-                <div class="program-icon">
-                    🤝
-                </div>
+<div class="reveal">
 
-                <h3>
-                    OSIS Connect
-                </h3>
+<div class="section-label">
+07 — Galeri
+</div>
 
-                <p>
-                    Membangun komunikasi yang lebih dekat
-                    antara OSIS dan seluruh siswa.
-                </p>
+<h2 class="section-title">
+Satu perjalanan.<br>
+Banyak cerita.
+</h2>
 
-            </div>
+</div>
 
+<div class="gallery">
 
-            <div class="card reveal">
+<div class="gallery-item reveal">
 
-                <div class="program-icon">
-                    ⚡
-                </div>
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
+alt="Azriel"
+>
 
-                <h3>
-                    Event Sekolah
-                </h3>
+</div>
 
-                <p>
-                    Mengembangkan kegiatan sekolah yang
-                    lebih seru, kreatif, dan berkesan.
-                </p>
+<div class="gallery-item reveal">
 
-            </div>
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
+alt="Poster Azriel"
+>
 
+</div>
 
-            <div class="card reveal">
+<div class="gallery-item reveal">
 
-                <div class="program-icon">
-                    🌱
-                </div>
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
+alt="Azriel Campaign"
+>
 
-                <h3>
-                    School Care
-                </h3>
+</div>
 
-                <p>
-                    Mengajak siswa menjaga lingkungan sekolah
-                    agar tetap nyaman dan bersih.
-                </p>
+<div class="gallery-item reveal">
 
-            </div>
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
+alt="Poster Campaign"
+>
 
-        </div>
+</div>
 
-    </section>
+<div class="gallery-item reveal">
 
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
+alt="Azriel OSIS"
+>
 
-    <!-- =========================
-         GALERI
-    ========================= -->
+</div>
 
-    <section id="galeri">
+</div>
 
-        <div class="reveal">
+</section>
 
-            <div class="section-label">
-                06 — Galeri
-            </div>
 
-            <h2 class="section-title">
-                Satu perjalanan.<br>
-                Banyak cerita.
-            </h2>
+<!-- =========================
+     POSTER
+========================= -->
 
-        </div>
+<section>
 
+<div class="poster">
 
-        <div class="gallery">
+<div class="reveal">
 
-            <div class="gallery-item reveal">
+<div class="section-label">
+Campaign
+</div>
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
-                    alt="Azriel"
-                >
+<h2 class="section-title">
+Bersama kita<br>
+bergerak.
+</h2>
 
-            </div>
+<p class="section-description">
+Dukungan, ide, dan partisipasi setiap siswa
+menjadi bagian penting dari perjalanan ini.
+</p>
 
+</div>
 
-            <div class="gallery-item reveal">
+<div class="reveal">
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
-                    alt="Poster Azriel"
-                >
+<img
+src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
+alt="Poster Kampanye Azriel"
+>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="gallery-item reveal">
+</section>
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
-                    alt="Azriel Campaign"
-                >
 
-            </div>
+<!-- =========================
+     QR CODE
+========================= -->
 
+<section id="qr">
 
-            <div class="gallery-item reveal">
+<div class="reveal">
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
-                    alt="Poster Campaign"
-                >
+<div class="section-label">
+08 — Quick Access
+</div>
 
-            </div>
+<h2 class="section-title">
+Scan.<br>
+Langsung masuk.
+</h2>
 
+<p class="section-description">
+Scan QR Code di bawah menggunakan kamera HP
+untuk langsung membuka website Azriel.
+</p>
 
-            <div class="gallery-item reveal">
+</div>
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
-                    alt="Azriel OSIS"
-                >
 
-            </div>
+<div class="qr-box reveal">
 
-        </div>
+<div class="qr-content">
 
-    </section>
+<div class="qr-text">
 
+<div class="qr-badge">
+📱 SCAN TO OPEN
+</div>
 
-    <!-- =========================
-         POSTER
-    ========================= -->
+<h3>
+AZRIEL<br>
+<span>FOR OSIS.</span>
+</h3>
 
-    <section>
+<p>
+Nggak perlu ketik alamat website.
+Cukup scan QR Code dan langsung masuk.
+</p>
 
-        <div class="poster">
+<button
+class="btn btn-primary"
+id="copyWebBtn"
+type="button"
+>
+⧉ Salin Link Website
+</button>
 
-            <div class="reveal">
+</div>
 
-                <div class="section-label">
-                    Campaign
-                </div>
 
-                <h2 class="section-title">
-                    Bersama kita<br>
-                    bergerak.
-                </h2>
+<div class="qr-code-wrapper">
 
-                <p class="section-description">
-                    Dukungan, ide, dan partisipasi setiap siswa
-                    menjadi bagian penting dari perjalanan ini.
-                </p>
+<div id="qrcode"></div>
 
-            </div>
+<small>
+SCAN ME
+</small>
 
+</div>
 
-            <div class="reveal">
+</div>
 
-                <img
-                    src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
-                    alt="Poster Kampanye Azriel"
-                >
+</div>
 
-            </div>
+</section>
 
-        </div>
 
-    </section>
+<!-- =========================
+     ASPIRASI
+========================= -->
 
+<section id="aspirasi">
 
-    <!-- =========================
-         DUKUNG AZRIEL
-    ========================= -->
+<div class="reveal">
 
-    <section id="support" class="support-section">
+<div class="section-label">
+09 — Aspirasi
+</div>
 
-        <div class="reveal">
+<h2 class="section-title">
+Punya ide?<br>
+Sampaikan.
+</h2>
 
-            <div class="section-label">
-                07 — Dukungan
-            </div>
+<p class="section-description">
+Tuliskan ide atau masukan untuk membuat kegiatan
+sekolah menjadi lebih baik.
+</p>
 
-            <h2 class="section-title">
-                Dukung Azriel.
-            </h2>
+</div>
 
-            <p
-                class="section-description"
-                style="margin:auto;"
-            >
-                Tunjukkan dukunganmu untuk semangat perubahan
-                dan kebersamaan di sekolah.
-            </p>
+<div class="aspiration-box reveal">
 
-        </div>
+<textarea
+id="aspirationInput"
+maxlength="500"
+placeholder="Tulis aspirasi atau ide kamu di sini..."
+></textarea>
 
+<div class="aspiration-bottom">
 
-        <div class="support-box reveal">
+<span class="char-count">
+<span id="charCount">0</span>/500
+</span>
 
-            <h3>
-                SIAP BERGERAK?
-            </h3>
+<button
+class="btn btn-primary"
+id="saveAspiration"
+type="button"
+>
+Simpan Aspirasi
+</button>
 
-            <p>
-                Klik tombol di bawah untuk memberikan dukunganmu.
-            </p>
+</div>
 
-            <div class="support-count">
+</div>
 
-                <span id="supportCount">
-                    0
-                </span>
+</section>
 
-                <small>
-                    Dukungan di Website
-                </small>
 
-            </div>
+<!-- =========================
+     FAQ
+========================= -->
 
+<section id="faq">
 
-            <button
-                class="support-btn"
-                id="supportBtn"
-                type="button"
-            >
-                ❤️ Dukung Azriel
-            </button>
+<div class="reveal">
 
-        </div>
+<div class="section-label">
+10 — FAQ
+</div>
 
-    </section>
+<h2 class="section-title">
+Pertanyaan<br>
+yang sering muncul.
+</h2>
 
+</div>
 
-    <!-- =========================
-         CTA
-    ========================= -->
+<div class="faq">
 
-    <section class="cta">
+<div class="faq-item reveal">
 
-        <div class="reveal">
+<button class="faq-question" type="button">
+Kenapa memilih Azriel?
+<span class="faq-icon">+</span>
+</button>
 
-            <div class="section-label">
-                Final Message
-            </div>
+<div class="faq-answer">
 
-            <h2>
-                SAATNYA<br>
-                <span>BERGERAK.</span>
-            </h2>
+<p>
+Karena Azriel ingin membangun OSIS yang lebih aktif,
+terbuka, kreatif, dan melibatkan seluruh siswa.
+</p>
 
-            <p>
-                #AzrielForOSIS ↑
-            </p>
+</div>
 
-        </div>
+</div>
 
-    </section>
-        <!-- =========================
-         FOOTER
-    ========================= -->
 
-    <footer>
+<div class="faq-item reveal">
 
-        <div>
-            © 2026 Azriel — Calon Ketua OSIS
-        </div>
+<button class="faq-question" type="button">
+Apa fokus utama program?
+<span class="faq-icon">+</span>
+</button>
 
-        <div>
-            Bersama Kita Bergerak.
-        </div>
+<div class="faq-answer">
 
-    </footer>
+<p>
+Fokusnya adalah kebersamaan, kreativitas, aspirasi,
+kegiatan positif, komunikasi, dan kepedulian terhadap sekolah.
+</p>
 
+</div>
 
-    <!-- =========================
-         BACK TO TOP
-    ========================= -->
+</div>
 
-    <button id="topBtn" aria-label="Kembali ke atas">
-        ↑
-    </button>
 
+<div class="faq-item reveal">
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+<button class="faq-question" type="button">
+Apakah siswa bisa memberikan ide?
+<span class="faq-icon">+</span>
+</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div class="faq-answer">
 
-    <script>
+<p>
+Bisa. Website ini menyediakan bagian Aspirasi agar siswa
+dapat menuliskan ide dan masukan mereka.
+</p>
 
-        /* =========================
-           NAVBAR
-        ========================= */
+</div>
 
-        const navbar = document.getElementById("navbar");
+</div>
 
-        window.addEventListener("scroll", () => {
 
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
+<div class="faq-item reveal">
 
-        });
+<button class="faq-question" type="button">
+Apa arti #AzrielForOSIS?
+<span class="faq-icon">+</span>
+</button>
 
+<div class="faq-answer">
 
-        /* =========================
-           MOBILE MENU
-        ========================= */
+<p>
+Bukan hanya nama kampanye, tetapi ajakan untuk bergerak
+bersama dan ikut menciptakan perubahan positif.
+</p>
 
-        const menuBtn = document.getElementById("menuBtn");
-        const navLinks = document.getElementById("navLinks");
+</div>
 
-        if (menuBtn && navLinks) {
+</div>
 
-            menuBtn.addEventListener("click", () => {
+</div>
 
-                navLinks.classList.toggle("open");
+</section>
 
-                if (navLinks.classList.contains("open")) {
-                    menuBtn.textContent = "✕";
-                } else {
-                    menuBtn.textContent = "☰";
-                }
 
-            });
+<!-- =========================
+     SUPPORT
+========================= -->
 
+<section id="support" class="support-section">
 
-            document.querySelectorAll(".nav-links a").forEach(link => {
+<div class="reveal">
 
-                link.addEventListener("click", () => {
+<div class="section-label">
+11 — Dukungan
+</div>
 
-                    navLinks.classList.remove("open");
-                    menuBtn.textContent = "☰";
+<h2 class="section-title">
+Dukung Azriel.
+</h2>
 
-                });
+<p
+class="section-description"
+style="margin:auto;"
+>
+Tunjukkan dukunganmu untuk semangat perubahan
+dan kebersamaan di sekolah.
+</p>
 
-            });
+</div>
 
-        }
 
+<div class="support-box reveal">
 
-        /* =========================
-           SCROLL REVEAL
-        ========================= */
+<h3>
+SIAP BERGERAK?
+</h3>
 
-        const revealElements = document.querySelectorAll(".reveal");
+<p>
+Klik tombol di bawah untuk memberikan dukunganmu.
+</p>
 
-        const observer = new IntersectionObserver(
-            entries => {
+<div class="support-count">
 
-                entries.forEach(entry => {
+<span id="supportCount">
+0
+</span>
 
-                    if (entry.isIntersecting) {
+<small>
+Dukungan di Website
+</small>
 
-                        entry.target.classList.add("active");
+</div>
 
-                        observer.unobserve(entry.target);
 
-                    }
+<div class="progress-wrap">
 
-                });
+<div
+class="progress-bar"
+id="progressBar"
+></div>
 
-            },
-            {
-                threshold: 0.12
-            }
-        );
+</div>
 
-        revealElements.forEach(element => {
-            observer.observe(element);
-        });
+<div
+class="progress-text"
+id="progressText"
+>
+0 dukungan terkumpul
+</div>
 
+<br>
 
-        /* =========================
-           BACK TO TOP
-        ========================= */
 
-        const topBtn = document.getElementById("topBtn");
+<button
+class="support-btn"
+id="supportBtn"
+type="button"
+>
+❤️ Dukung Azriel
+</button>
 
-        if (topBtn) {
 
-            window.addEventListener("scroll", () => {
+<div class="share-area">
 
-                if (window.scrollY > 500) {
-                    topBtn.classList.add("show");
-                } else {
-                    topBtn.classList.remove("show");
-                }
+<button
+class="share-btn"
+id="shareBtn"
+type="button"
+>
+↗ Bagikan Campaign
+</button>
 
-            });
+<button
+class="share-btn"
+id="copyBtn"
+type="button"
+>
+⧉ Salin Hashtag
+</button>
 
+</div>
 
-            topBtn.addEventListener("click", () => {
+</div>
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+</section>
 
-            });
 
-        }
+<!-- =========================
+     CTA
+========================= -->
 
+<section class="cta">
 
-        /* =========================
-           DUKUNG AZRIEL
-           SUPABASE ONLINE
-        ========================= */
+<div class="reveal">
 
-        const SUPABASE_URL =
-            "https://flllmissujjnwecbvbtp.supabase.co";
+<div class="section-label">
+Final Message
+</div>
 
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_AtBpcdqmJPx0WVzZdqfKjg_bhNmK93q";
+<h2>
+SAATNYA<br>
+<span>BERGERAK.</span>
+</h2>
 
+<p>
+#AzrielForOSIS ↑
+</p>
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-        );
+</div>
 
+</section>
 
-        const supportBtn =
-            document.getElementById("supportBtn");
 
-        const supportCount =
-            document.getElementById("supportCount");
+<!-- =========================
+     FOOTER
+========================= -->
 
+<footer>
 
-        /* =========================
-           CEK SUDAH VOTE
-        ========================= */
+<div>
+© 2026 Azriel — Calon Ketua OSIS
+</div>
 
-        function hasVoted() {
+<div>
+Bersama Kita Bergerak.
+</div>
 
-            return localStorage.getItem("azrielVoted") === "true";
+</footer>
 
-        }
 
+<!-- =========================
+     TOP BUTTON
+========================= -->
 
-        /* =========================
-           BUTTON SUDAH DIDUKUNG
-        ========================= */
+<button
+id="topBtn"
+aria-label="Kembali ke atas"
+>
+↑
+</button>
 
-        function showAlreadyVoted() {
 
-            if (!supportBtn) return;
+<div
+class="toast"
+id="toast"
+>
+Berhasil!
+</div>
 
-            supportBtn.textContent = "✓ Sudah Didukung";
 
-            supportBtn.classList.add("supported");
+<!-- =========================
+     LIBRARIES
+========================= -->
 
-            supportBtn.disabled = true;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 
-        /* =========================
-           LOAD JUMLAH VOTE
-        ========================= */
+<script>
 
-        async function loadVotes() {
+/* =========================
+   NAVBAR
+========================= */
 
-            if (!supportCount) return;
+const navbar =
+document.getElementById("navbar");
 
-            try {
+window.addEventListener("scroll",()=>{
 
-                const { data, error } =
-                    await supabaseClient
-                        .from("votes")
-                        .select("count")
-                        .eq("id", 1)
-                        .single();
+if(window.scrollY>50){
 
+navbar.classList.add("scrolled");
 
-                if (error) {
+}else{
 
-                    console.error(
-                        "Gagal mengambil vote:",
-                        error
-                    );
+navbar.classList.remove("scrolled");
 
-                    return;
+}
 
-                }
+});
 
 
-                supportCount.textContent =
-                    Number(data.count).toLocaleString("id-ID");
+/* =========================
+   MOBILE MENU
+========================= */
 
-            } catch (error) {
+const menuBtn =
+document.getElementById("menuBtn");
 
-                console.error(
-                    "Supabase error:",
-                    error
-                );
+const navLinks =
+document.getElementById("navLinks");
 
-            }
+if(menuBtn && navLinks){
 
-        }
+menuBtn.addEventListener("click",()=>{
 
+navLinks.classList.toggle("open");
 
-        /* =========================
-           ANIMASI HATI
-        ========================= */
+menuBtn.textContent =
+navLinks.classList.contains("open")
+? "✕"
+: "☰";
 
-        function createHeartAnimation() {
+});
 
-            if (!supportBtn) return;
 
+document.querySelectorAll(".nav-links a")
+.forEach(link=>{
 
-            const heart =
-                document.createElement("div");
+link.addEventListener("click",()=>{
 
+navLinks.classList.remove("open");
 
-            heart.className = "heart-pop";
+menuBtn.textContent="☰";
 
-            heart.textContent = "❤️";
+});
 
+});
 
-            const rect =
-                supportBtn.getBoundingClientRect();
+}
 
 
-            heart.style.position = "fixed";
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-            heart.style.left =
-                `${rect.left + rect.width / 2}px`;
+const revealElements =
+document.querySelectorAll(".reveal");
 
-            heart.style.top =
-                `${rect.top}px`;
+const observer =
+new IntersectionObserver(
 
-            heart.style.zIndex = "9999";
+entries=>{
 
+entries.forEach(entry=>{
 
-            document.body.appendChild(heart);
+if(entry.isIntersecting){
 
+entry.target.classList.add("active");
 
-            setTimeout(() => {
+observer.unobserve(entry.target);
 
-                heart.remove();
+}
 
-            }, 1000);
+});
 
-        }
+},
 
+{
+threshold:.12
+}
 
-        /* =========================
-           KIRIM VOTE
-        ========================= */
+);
 
-        async function sendVote() {
+revealElements.forEach(element=>{
 
-            if (!supportBtn) return;
+observer.observe(element);
 
+});
 
-            if (hasVoted()) {
 
-                showAlreadyVoted();
+/* =========================
+   ACTIVE NAV
+========================= */
 
-                return;
+const sections =
+document.querySelectorAll(
+"section[id], header[id]"
+);
 
-            }
+const navItems =
+document.querySelectorAll(
+".nav-links a:not(.nav-support)"
+);
 
+window.addEventListener("scroll",()=>{
 
-            supportBtn.disabled = true;
+let current="";
 
-            supportBtn.textContent =
-                "⏳ Mengirim...";
+sections.forEach(section=>{
 
+const top =
+section.offsetTop-150;
 
-            try {
+if(window.scrollY>=top){
 
-                const { data, error } =
-                    await supabaseClient
-                        .rpc("increment_vote");
+current =
+section.getAttribute("id");
 
+}
 
-                if (error) {
+});
 
-                    console.error(
-                        "Vote gagal:",
-                        error
-                    );
+navItems.forEach(link=>{
 
+link.classList.remove("active");
 
-                    supportBtn.disabled = false;
+if(
+link.getAttribute("href")
+===
+"#"+current
+){
 
-                    supportBtn.textContent =
-                        "❤️ Dukung Azriel";
+link.classList.add("active");
 
+}
 
-                    alert(
-                        "Vote gagal dikirim. Coba lagi."
-                    );
+});
 
-                    return;
+});
 
-                }
 
+/* =========================
+   BACK TO TOP
+========================= */
 
-                supportCount.textContent =
-                    Number(data).toLocaleString("id-ID");
+const topBtn =
+document.getElementById("topBtn");
 
+window.addEventListener("scroll",()=>{
 
-                localStorage.setItem(
-                    "azrielVoted",
-                    "true"
-                );
+if(window.scrollY>500){
 
+topBtn.classList.add("show");
 
-                supportBtn.textContent =
-                    "✓ Terima kasih!";
+}else{
 
+topBtn.classList.remove("show");
 
-                supportBtn.classList.add(
-                    "supported"
-                );
+}
 
+});
 
-                createHeartAnimation();
 
+topBtn.addEventListener("click",()=>{
 
-            } catch (error) {
+window.scrollTo({
 
-                console.error(
-                    "Supabase error:",
-                    error
-                );
+top:0,
+behavior:"smooth"
 
+});
 
-                supportBtn.disabled = false;
+});
 
-                supportBtn.textContent =
-                    "❤️ Dukung Azriel";
 
+/* =========================
+   TOAST
+========================= */
 
-                alert(
-                    "Terjadi kesalahan. Coba lagi."
-                );
+const toast =
+document.getElementById("toast");
 
-            }
+function showToast(message){
 
-        }
+toast.textContent=message;
 
+toast.classList.add("show");
 
-        /* =========================
-           EVENT BUTTON VOTE
-        ========================= */
+setTimeout(()=>{
 
-        if (supportBtn) {
+toast.classList.remove("show");
 
-            supportBtn.addEventListener(
-                "click",
-                sendVote
-            );
+},2500);
 
-        }
+}
 
 
-        /* =========================
-           LOAD DATA AWAL
-        ========================= */
+/* =========================
+   QR CODE
+========================= */
 
-        loadVotes();
+const qrContainer =
+document.getElementById("qrcode");
 
+if(qrContainer){
 
-        if (hasVoted()) {
+new QRCode(qrContainer,{
 
-            showAlreadyVoted();
+text:window.location.href,
 
-        }
+width:250,
 
+height:250,
 
-        /* =========================
-           IMAGE ERROR CHECK
-        ========================= */
+colorDark:"#000000",
 
-        document.querySelectorAll("img").forEach(img => {
+colorLight:"#ffffff",
 
-            img.addEventListener("error", () => {
+correctLevel:
+QRCode.CorrectLevel.H
 
-                console.warn(
-                    "Gambar tidak ditemukan:",
-                    img.src
-                );
+});
 
-            });
+}
 
-        });
 
-    </script>
+/* =========================
+   COPY WEBSITE
+========================= */
+
+const copyWebBtn =
+document.getElementById("copyWebBtn");
+
+if(copyWebBtn){
+
+copyWebBtn.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await navigator.clipboard.writeText(
+window.location.href
+);
+
+showToast(
+"Link website berhasil disalin ✓"
+);
+
+}catch(error){
+
+showToast(
+"Gagal menyalin link."
+);
+
+}
+
+});
+
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+document
+.querySelectorAll(".faq-question")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const item =
+button.parentElement;
+
+document
+.querySelectorAll(".faq-item")
+.forEach(other=>{
+
+if(other!==item){
+
+other.classList.remove("open");
+
+}
+
+});
+
+item.classList.toggle("open");
+
+});
+
+});
+
+
+/* =========================
+   ASPIRASI
+========================= */
+
+const aspirationInput =
+document.getElementById(
+"aspirationInput"
+);
+
+const charCount =
+document.getElementById(
+"charCount"
+);
+
+
+if(aspirationInput){
+
+aspirationInput.addEventListener(
+"input",
+()=>{
+
+charCount.textContent =
+aspirationInput.value.length;
+
+});
+
+}
+
+
+const savedAspiration =
+localStorage.getItem(
+"azrielAspiration"
+);
+
+if(
+savedAspiration &&
+aspirationInput
+){
+
+aspirationInput.value =
+savedAspiration;
+
+charCount.textContent =
+savedAspiration.length;
+
+}
+
+
+const saveAspiration =
+document.getElementById(
+"saveAspiration"
+);
+
+if(saveAspiration){
+
+saveAspiration.addEventListener(
+"click",
+()=>{
+
+const value =
+aspirationInput.value.trim();
+
+if(!value){
+
+showToast(
+"Tulis aspirasinya dulu 😄"
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"azrielAspiration",
+value
+);
+
+showToast(
+"Aspirasi berhasil disimpan ✓"
+);
+
+});
+
+}
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://flllmissujjnwecbvbtp.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_AtBpcdqmJPx0WVzZdqfKjg_bhNmK93q";
+
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+const supportBtn =
+document.getElementById(
+"supportBtn"
+);
+
+const supportCount =
+document.getElementById(
+"supportCount"
+);
+
+const statVotes =
+document.getElementById(
+"statVotes"
+);
+
+const progressBar =
+document.getElementById(
+"progressBar"
+);
+
+const progressText =
+document.getElementById(
+"progressText"
+);
+
+
+/* =========================
+   VOTE CHECK
+========================= */
+
+function hasVoted(){
+
+return localStorage.getItem(
+"azrielVoted"
+)==="true";
+
+}
+
+
+/* =========================
+   ALREADY VOTED
+========================= */
+
+function showAlreadyVoted(){
+
+if(!supportBtn) return;
+
+supportBtn.textContent =
+"✓ Sudah Didukung";
+
+supportBtn.classList.add(
+"supported"
+);
+
+supportBtn.disabled=true;
+
+}
+
+
+/* =========================
+   UPDATE VOTE DISPLAY
+========================= */
+
+function updateVoteDisplay(count){
+
+const number =
+Number(count)||0;
+
+
+if(supportCount){
+
+supportCount.textContent =
+number.toLocaleString("id-ID");
+
+}
+
+
+if(statVotes){
+
+statVotes.textContent =
+number.toLocaleString("id-ID");
+
+}
+
+
+if(progressBar){
+
+const percentage =
+Math.min(
+(number/100)*100,
+100
+);
+
+progressBar.style.width =
+percentage+"%";
+
+}
+
+
+if(progressText){
+
+progressText.textContent =
+number.toLocaleString("id-ID")
++
+" dukungan terkumpul";
+
+}
+
+}
+
+
+/* =========================
+   LOAD VOTES
+========================= */
+
+async function loadVotes(){
+
+try{
+
+const {data,error} =
+await supabaseClient
+.from("votes")
+.select("count")
+.eq("id",1)
+.single();
+
+
+if(error){
+
+console.error(
+"Gagal mengambil vote:",
+error
+);
+
+return;
+
+}
+
+
+updateVoteDisplay(
+data.count
+);
+
+}catch(error){
+
+console.error(
+"Supabase error:",
+error
+);
+
+}
+
+}
+
+
+/* =========================
+   HEART ANIMATION
+========================= */
+
+function createHeartAnimation(){
+
+if(!supportBtn) return;
+
+const heart =
+document.createElement("div");
+
+heart.className =
+"heart-pop";
+
+heart.textContent="❤️";
+
+const rect =
+supportBtn.getBoundingClientRect();
+
+heart.style.position="fixed";
+
+heart.style.left =
+(rect.left+rect.width/2)
++"px";
+
+heart.style.top =
+rect.top+"px";
+
+heart.style.zIndex="9999";
+
+document.body.appendChild(
+heart
+);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},1000);
+
+}
+
+
+/* =========================
+   SEND VOTE
+========================= */
+
+async function sendVote(){
+
+if(!supportBtn) return;
+
+
+if(hasVoted()){
+
+showAlreadyVoted();
+
+return;
+
+}
+
+
+supportBtn.disabled=true;
+
+supportBtn.textContent =
+"⏳ Mengirim...";
+
+
+try{
+
+const {data,error} =
+await supabaseClient
+.rpc("increment_vote");
+
+
+if(error){
+
+console.error(
+"Vote gagal:",
+error
+);
+
+supportBtn.disabled=false;
+
+supportBtn.textContent =
+"❤️ Dukung Azriel";
+
+showToast(
+"Vote gagal dikirim."
+);
+
+return;
+
+}
+
+
+updateVoteDisplay(data);
+
+
+localStorage.setItem(
+"azrielVoted",
+"true"
+);
+
+
+supportBtn.textContent =
+"✓ Terima kasih!";
+
+supportBtn.classList.add(
+"supported"
+);
+
+
+createHeartAnimation();
+
+showToast(
+"Dukungan berhasil dikirim ❤️"
+);
+
+
+}catch(error){
+
+console.error(
+"Supabase error:",
+error
+);
+
+supportBtn.disabled=false;
+
+supportBtn.textContent =
+"❤️ Dukung Azriel";
+
+showToast(
+"Terjadi kesalahan."
+);
+
+}
+
+}
+
+
+if(supportBtn){
+
+supportBtn.addEventListener(
+"click",
+sendVote
+);
+
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+const shareBtn =
+document.getElementById(
+"shareBtn"
+);
+
+if(shareBtn){
+
+shareBtn.addEventListener(
+"click",
+async()=>{
+
+const shareData={
+
+title:"Azriel For OSIS",
+
+text:
+"Dukung Azriel sebagai calon Ketua OSIS 2026! #AzrielForOSIS",
+
+url:window.location.href
+
+};
+
+
+try{
+
+if(navigator.share){
+
+await navigator.share(
+shareData
+);
+
+}else{
+
+await navigator.clipboard.writeText(
+window.location.href
+);
+
+showToast(
+"Link campaign disalin ✓"
+);
+
+}
+
+}catch(error){
+
+console.log(
+"Share dibatalkan."
+);
+
+}
+
+});
+
+}
+
+
+/* =========================
+   COPY HASHTAG
+========================= */
+
+const copyBtn =
+document.getElementById(
+"copyBtn"
+);
+
+if(copyBtn){
+
+copyBtn.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await navigator.clipboard.writeText(
+"#AzrielForOSIS"
+);
+
+showToast(
+"#AzrielForOSIS berhasil disalin ✓"
+);
+
+}catch(error){
+
+showToast(
+"Gagal menyalin hashtag."
+);
+
+}
+
+});
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+loadVotes();
+
+
+if(hasVoted()){
+
+showAlreadyVoted();
+
+}
+
+
+/* =========================
+   AUTO REFRESH VOTE
+========================= */
+
+setInterval(()=>{
+
+loadVotes();
+
+},30000);
+
+
+/* =========================
+   IMAGE ERROR CHECK
+========================= */
+
+document
+.querySelectorAll("img")
+.forEach(img=>{
+
+img.addEventListener(
+"error",
+()=>{
+
+console.warn(
+"Gambar tidak ditemukan:",
+img.src
+);
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
+```
