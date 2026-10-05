@@ -6,7 +6,17 @@
 
     <title>Azriel — Calon Ketua OSIS 2026</title>
 
+    <meta
+        name="description"
+        content="Azriel — Calon Ketua OSIS 2026. Bersama membangun sekolah yang lebih aktif, kreatif, solid, dan penuh kesempatan."
+    >
+
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -31,11 +41,22 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background:
-                radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 25%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent 25%),
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(255,255,255,0.08),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(255,255,255,0.05),
+                    transparent 25%
+                ),
                 var(--bg);
             color: var(--text);
             overflow-x: hidden;
+            transition:
+                background 0.35s ease,
+                color 0.35s ease;
         }
 
         body::before {
@@ -45,10 +66,22 @@
             pointer-events: none;
             opacity: 0.13;
             background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+                linear-gradient(
+                    rgba(255,255,255,0.04) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.04) 1px,
+                    transparent 1px
+                );
             background-size: 45px 45px;
-            mask-image: linear-gradient(to bottom, black, transparent 80%);
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 80%
+                );
             z-index: -1;
         }
 
@@ -57,12 +90,17 @@
             text-decoration: none;
         }
 
+        button {
+            font-family: inherit;
+        }
+
         section {
             width: min(1180px, 90%);
             margin: auto;
             padding: 110px 0;
             scroll-margin-top: 80px;
         }
+
 
         /* =========================
            NAVBAR
@@ -74,12 +112,17 @@
             left: 0;
             width: 100%;
             height: 72px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 5%;
+
             z-index: 1000;
+
             border-bottom: 1px solid transparent;
+
             transition: 0.3s;
         }
 
@@ -123,14 +166,47 @@
             color: black !important;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-btn,
+        .menu-btn {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            background: var(--card);
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .theme-btn {
+            font-size: 17px;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(20deg) scale(1.08);
+        }
+
         .menu-btn {
             display: none;
-            background: none;
             border: none;
-            color: white;
+            background: none;
             font-size: 26px;
-            cursor: pointer;
         }
+
 
         /* =========================
            HERO
@@ -139,60 +215,89 @@
         .hero {
             min-height: 100vh;
             width: 100%;
+
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
+
             align-items: center;
+
             gap: 70px;
+
             padding: 120px 7% 70px;
         }
 
         .badge {
             display: inline-block;
+
             border: 1px solid var(--border);
+
             padding: 9px 15px;
+
             border-radius: 999px;
+
             color: #ccc;
+
             font-size: 13px;
+
             margin-bottom: 25px;
+
             background: rgba(255,255,255,0.03);
         }
 
         .hero h1 {
             font-size: clamp(60px, 9vw, 130px);
+
             line-height: 0.86;
+
             letter-spacing: -7px;
+
             font-weight: 900;
         }
 
         .hero h1 span {
             display: block;
+
             color: transparent;
+
             -webkit-text-stroke: 1px white;
         }
 
         .hero-text {
             max-width: 620px;
+
             margin-top: 30px;
+
             font-size: 18px;
+
             line-height: 1.7;
+
             color: var(--muted);
         }
 
         .hero-buttons {
             display: flex;
+
             gap: 14px;
+
             margin-top: 35px;
+
             flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
+
             padding: 14px 22px;
+
             border-radius: 999px;
+
             border: 1px solid var(--border);
+
             font-weight: 700;
+
             transition: 0.3s;
         }
 
@@ -203,7 +308,9 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.15);
+
+            box-shadow:
+                0 15px 40px rgba(255,255,255,0.15);
         }
 
         .btn-secondary {
@@ -213,32 +320,57 @@
         .btn-secondary:hover {
             background: white;
             color: black;
+
             transform: translateY(-3px);
         }
 
         .hero-image {
             position: relative;
+            cursor: zoom-in;
         }
 
         .hero-image::before {
             content: "";
+
             position: absolute;
+
             inset: -25px;
-            border: 1px solid rgba(255,255,255,0.1);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.1);
+
             border-radius: 35px;
+
             transform: rotate(4deg);
+
             z-index: -1;
         }
 
         .hero-image img {
             width: 100%;
+
             max-height: 680px;
+
             object-fit: cover;
+
             border-radius: 28px;
+
             display: block;
+
             filter: grayscale(15%);
-            box-shadow: 0 30px 100px rgba(0,0,0,0.55);
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,0.55);
+
+            transition: 0.5s;
         }
+
+        .hero-image:hover img {
+            transform: scale(1.015);
+        }
+
 
         /* =========================
            GENERAL
@@ -246,25 +378,36 @@
 
         .section-label {
             color: #777;
+
             font-size: 12px;
+
             text-transform: uppercase;
+
             letter-spacing: 3px;
+
             margin-bottom: 15px;
         }
 
         .section-title {
             font-size: clamp(38px, 6vw, 76px);
+
             line-height: 0.95;
+
             letter-spacing: -3px;
+
             margin-bottom: 25px;
         }
 
         .section-description {
             max-width: 720px;
+
             color: var(--muted);
+
             line-height: 1.8;
+
             font-size: 17px;
         }
+
 
         /* =========================
            ABOUT
@@ -272,33 +415,47 @@
 
         .about-grid {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 70px;
+
             align-items: center;
         }
 
         .about-info {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 15px;
         }
 
         .info-card {
             padding: 25px;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
             background: var(--card);
+
             border-radius: 20px;
+
             transition: 0.3s;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
+
             background: var(--card-hover);
         }
 
         .info-card small {
             color: #777;
+
             display: block;
+
             margin-bottom: 10px;
         }
 
@@ -306,27 +463,39 @@
             font-size: 17px;
         }
 
+
         /* =========================
            VISI
         ========================= */
 
         .visi-box {
             margin-top: 45px;
+
             padding: 55px;
-            border: 1px solid var(--border);
-            background: linear-gradient(
-                135deg,
-                rgba(255,255,255,0.08),
-                rgba(255,255,255,0.025)
-            );
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.025)
+                );
+
             border-radius: 30px;
         }
 
         .visi-box p {
-            font-size: clamp(25px, 4vw, 48px);
+            font-size:
+                clamp(25px, 4vw, 48px);
+
             line-height: 1.2;
+
             font-weight: 700;
         }
+
 
         /* =========================
            CARDS
@@ -334,39 +503,62 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 18px;
+
             margin-top: 50px;
         }
 
         .card {
             padding: 32px;
+
             min-height: 210px;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
             background: var(--card);
+
             border-radius: 24px;
+
             transition: 0.35s;
+
             position: relative;
+
             overflow: hidden;
         }
 
         .card::after {
             content: "";
+
             position: absolute;
+
             width: 100px;
             height: 100px;
+
             right: -50px;
             bottom: -50px;
+
             background: white;
+
             opacity: 0.04;
+
             border-radius: 50%;
+
             transition: 0.4s;
         }
 
         .card:hover {
             transform: translateY(-8px);
+
             background: var(--card-hover);
-            border-color: rgba(255,255,255,0.22);
+
+            border-color:
+                rgba(255,255,255,0.22);
         }
 
         .card:hover::after {
@@ -375,24 +567,30 @@
 
         .number {
             color: #777;
+
             font-size: 13px;
+
             margin-bottom: 35px;
         }
 
         .card h3 {
             font-size: 23px;
+
             margin-bottom: 12px;
         }
 
         .card p {
             color: var(--muted);
+
             line-height: 1.6;
         }
 
         .program-icon {
             font-size: 32px;
+
             margin-bottom: 25px;
         }
+
 
         /* =========================
            ALASAN
@@ -400,14 +598,20 @@
 
         .reason {
             text-align: center;
+
             padding: 140px 20px;
         }
 
         .reason p {
             max-width: 900px;
+
             margin: 35px auto 0;
-            font-size: clamp(27px, 4vw, 55px);
+
+            font-size:
+                clamp(27px, 4vw, 55px);
+
             line-height: 1.2;
+
             font-weight: 800;
         }
 
@@ -415,23 +619,36 @@
             color: #777;
         }
 
+
         /* =========================
            GALLERY
         ========================= */
 
         .gallery {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+
             grid-auto-rows: 260px;
+
             gap: 14px;
+
             margin-top: 50px;
         }
 
         .gallery-item {
             overflow: hidden;
+
             border-radius: 20px;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
             background: #111;
+
+            cursor: zoom-in;
         }
 
         .gallery-item:first-child {
@@ -440,8 +657,11 @@
 
         .gallery-item img {
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
             transition: 0.6s;
         }
 
@@ -449,23 +669,42 @@
             transform: scale(1.06);
         }
 
+
         /* =========================
            POSTER
         ========================= */
 
         .poster {
             margin-top: 70px;
+
             display: grid;
-            grid-template-columns: 1fr 1fr;
+
+            grid-template-columns:
+                1fr 1fr;
+
             gap: 40px;
+
             align-items: center;
         }
 
         .poster img {
             width: 100%;
+
             border-radius: 25px;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
+            cursor: zoom-in;
+
+            transition: 0.4s;
         }
+
+        .poster img:hover {
+            transform: scale(1.015);
+        }
+
 
         /* =========================
            SUPPORT
@@ -477,57 +716,93 @@
 
         .support-box {
             margin-top: 45px;
+
             padding: 70px 30px;
-            border: 1px solid rgba(255,255,255,0.14);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.14);
+
             border-radius: 35px;
+
             background:
-                radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 55%),
+                radial-gradient(
+                    circle at center,
+                    rgba(255,255,255,0.08),
+                    transparent 55%
+                ),
                 rgba(255,255,255,0.025);
+
             position: relative;
+
             overflow: hidden;
         }
 
         .support-box h3 {
-            font-size: clamp(34px, 5vw, 65px);
+            font-size:
+                clamp(34px, 5vw, 65px);
+
             margin-bottom: 15px;
+
             letter-spacing: -3px;
         }
 
         .support-box p {
             color: var(--muted);
+
             margin-bottom: 35px;
         }
 
         .support-count {
             font-size: 60px;
+
             font-weight: 900;
+
             margin-bottom: 25px;
         }
 
         .support-count small {
             display: block;
+
             color: #777;
+
             font-size: 13px;
+
             font-weight: normal;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
         .support-btn {
             border: none;
+
             background: white;
+
             color: black;
+
             padding: 17px 30px;
+
             border-radius: 999px;
+
             font-size: 16px;
+
             font-weight: 800;
+
             cursor: pointer;
+
             transition: 0.25s;
         }
 
         .support-btn:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(255,255,255,0.18);
+            transform:
+                translateY(-4px)
+                scale(1.03);
+
+            box-shadow:
+                0 20px 50px
+                rgba(255,255,255,0.18);
         }
 
         .support-btn:active {
@@ -536,28 +811,48 @@
 
         .support-btn.supported {
             background: #222;
+
             color: white;
-            border: 1px solid rgba(255,255,255,0.25);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
         }
 
         .heart-pop {
-            position: absolute;
+            position: fixed;
+
             font-size: 28px;
+
             pointer-events: none;
-            animation: heartFloat 1s ease-out forwards;
+
+            animation:
+                heartFloat 1s ease-out
+                forwards;
+
+            z-index: 3000;
         }
 
         @keyframes heartFloat {
+
             0% {
                 opacity: 1;
-                transform: translateY(0) scale(0.6);
+
+                transform:
+                    translateY(0)
+                    scale(0.6);
             }
 
             100% {
                 opacity: 0;
-                transform: translateY(-130px) scale(1.5);
+
+                transform:
+                    translateY(-130px)
+                    scale(1.5);
             }
+
         }
+
 
         /* =========================
            CTA
@@ -565,38 +860,55 @@
 
         .cta {
             text-align: center;
+
             padding: 130px 20px;
         }
 
         .cta h2 {
-            font-size: clamp(55px, 10vw, 130px);
+            font-size:
+                clamp(55px, 10vw, 130px);
+
             line-height: 0.85;
+
             letter-spacing: -7px;
         }
 
         .cta h2 span {
             color: transparent;
-            -webkit-text-stroke: 1px white;
+
+            -webkit-text-stroke:
+                1px white;
         }
 
         .cta p {
             margin-top: 35px;
+
             color: #888;
         }
+
 
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-            border-top: 1px solid var(--border);
+            border-top:
+                1px solid
+                var(--border);
+
             padding: 35px 5%;
+
             display: flex;
+
             justify-content: space-between;
+
             gap: 20px;
+
             color: #777;
+
             font-size: 13px;
         }
+
 
         /* =========================
            BACK TO TOP
@@ -604,56 +916,294 @@
 
         #topBtn {
             position: fixed;
+
             right: 25px;
             bottom: 25px;
+
             width: 48px;
             height: 48px;
+
             border-radius: 50%;
-            border: 1px solid var(--border);
-            background: rgba(10,10,10,0.8);
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(10,10,10,0.8);
+
             color: white;
+
             cursor: pointer;
+
             opacity: 0;
+
             pointer-events: none;
+
             transition: 0.3s;
+
             z-index: 999;
+
             backdrop-filter: blur(10px);
         }
 
         #topBtn.show {
             opacity: 1;
+
             pointer-events: auto;
         }
 
+
         /* =========================
-           REVEAL
+           SAFE REVEAL
         ========================= */
 
         .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: 0.8s ease;
-        }
-
-        .reveal.active {
             opacity: 1;
+
             transform: translateY(0);
         }
 
+        body.js-ready .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        body.js-ready
+        .reveal.active {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
         /* =========================
-           RESPONSIVE
+           LIGHTBOX
+        ========================= */
+
+        .image-lightbox {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.93);
+
+            backdrop-filter:
+                blur(15px);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition: 0.3s;
+
+            z-index: 5000;
+        }
+
+        .image-lightbox.show {
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+        .image-lightbox img {
+            max-width: 92vw;
+
+            max-height: 88vh;
+
+            object-fit: contain;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,0.6);
+
+            transform: scale(0.92);
+
+            transition: 0.3s;
+        }
+
+        .image-lightbox.show img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: fixed;
+
+            top: 25px;
+            right: 30px;
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color: white;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            z-index: 5001;
+
+            transition: 0.25s;
+        }
+
+        .lightbox-close:hover {
+            background: white;
+
+            color: black;
+        }
+
+
+        /* =========================
+           LIGHT MODE
+        ========================= */
+
+        body.light {
+            --bg: #f4f4f4;
+            --bg2: #ffffff;
+
+            --card:
+                rgba(0,0,0,0.045);
+
+            --card-hover:
+                rgba(0,0,0,0.08);
+
+            --text: #111111;
+
+            --muted: #555555;
+
+            --border:
+                rgba(0,0,0,0.12);
+
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(0,0,0,0.06),
+                    transparent 25%
+                ),
+                #f4f4f4;
+
+            color: #111;
+        }
+
+        body.light::before {
+            opacity: 0.05;
+        }
+
+        body.light nav.scrolled {
+            background:
+                rgba(255,255,255,0.86);
+        }
+
+        body.light .nav-links a {
+            color: #555;
+        }
+
+        body.light .nav-links a:hover {
+            color: #111;
+        }
+
+        body.light .nav-support {
+            color: #111 !important;
+
+            border-color:
+                rgba(0,0,0,0.2);
+        }
+
+        body.light .nav-support:hover {
+            background: #111;
+
+            color: white !important;
+        }
+
+        body.light .hero h1 span,
+        body.light .cta h2 span {
+            -webkit-text-stroke:
+                1px #111;
+        }
+
+        body.light .btn-primary {
+            background: #111;
+
+            color: white;
+        }
+
+        body.light .btn-secondary {
+            color: #111;
+        }
+
+        body.light .btn-secondary:hover {
+            background: #111;
+
+            color: white;
+        }
+
+        body.light .support-btn {
+            background: #111;
+
+            color: white;
+        }
+
+        body.light #topBtn {
+            background:
+                rgba(255,255,255,0.85);
+
+            color: #111;
+        }
+
+        body.light .theme-btn {
+            background: white;
+
+            color: #111;
+        }
+
+
+        /* =========================
+           MOBILE
         ========================= */
 
         @media (max-width: 900px) {
 
             .hero {
                 grid-template-columns: 1fr;
+
                 padding-top: 130px;
             }
 
             .hero-image {
                 max-width: 650px;
+
                 width: 100%;
+
                 margin: auto;
             }
 
@@ -663,11 +1213,13 @@
             }
 
             .cards {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
             }
 
             .gallery {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
             }
 
             .gallery-item:first-child {
@@ -676,14 +1228,25 @@
 
             .nav-links {
                 position: absolute;
+
                 top: 72px;
+
                 left: 0;
+
                 width: 100%;
+
                 display: none;
+
                 flex-direction: column;
+
                 padding: 25px;
-                background: rgba(5,5,5,0.96);
-                border-bottom: 1px solid var(--border);
+
+                background:
+                    rgba(5,5,5,0.97);
+
+                border-bottom:
+                    1px solid
+                    var(--border);
             }
 
             .nav-links.open {
@@ -691,25 +1254,36 @@
             }
 
             .menu-btn {
-                display: block;
+                display: flex;
             }
+
+            body.light .nav-links {
+                background:
+                    rgba(255,255,255,0.97);
+            }
+
         }
+
 
         @media (max-width: 600px) {
 
             section {
                 width: 88%;
+
                 padding: 80px 0;
             }
 
             .hero {
                 padding-left: 6%;
+
                 padding-right: 6%;
+
                 gap: 45px;
             }
 
             .hero h1 {
                 font-size: 68px;
+
                 letter-spacing: -4px;
             }
 
@@ -727,25 +1301,37 @@
 
             .gallery {
                 grid-template-columns: 1fr;
+
                 grid-auto-rows: 300px;
             }
 
             .visi-box,
             .support-box {
-                padding: 40px 25px;
+                padding:
+                    40px 25px;
             }
 
             .cta h2 {
                 font-size: 65px;
+
                 letter-spacing: -4px;
             }
 
             footer {
                 flex-direction: column;
             }
+
+            .theme-btn,
+            .menu-btn {
+                width: 40px;
+                height: 40px;
+            }
+
         }
 
+
         @media (prefers-reduced-motion: reduce) {
+
             html {
                 scroll-behavior: auto;
             }
@@ -753,15 +1339,50 @@
             *,
             *::before,
             *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         IMAGE LIGHTBOX
+    ========================= -->
+
+    <div
+        class="image-lightbox"
+        id="imageLightbox"
+    >
+
+        <button
+            class="lightbox-close"
+            id="lightboxClose"
+            aria-label="Tutup foto"
+        >
+            ✕
+        </button>
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Preview gambar"
+        >
+
+    </div>
+
 
     <!-- =========================
          NAVBAR
@@ -769,20 +1390,68 @@
 
     <nav id="navbar">
 
-        <a href="#home" class="logo">AZRIEL.</a>
+        <a
+            href="#home"
+            class="logo"
+        >
+            AZRIEL.
+        </a>
 
-        <div class="nav-links" id="navLinks">
-            <a href="#about">Tentang</a>
-            <a href="#visi">Visi</a>
-            <a href="#misi">Misi</a>
-            <a href="#program">Program</a>
-            <a href="#galeri">Galeri</a>
-            <a href="#support" class="nav-support">Dukung Azriel</a>
+
+        <div
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <a href="#about">
+                Tentang
+            </a>
+
+            <a href="#visi">
+                Visi
+            </a>
+
+            <a href="#misi">
+                Misi
+            </a>
+
+            <a href="#program">
+                Program
+            </a>
+
+            <a href="#galeri">
+                Galeri
+            </a>
+
+            <a
+                href="#support"
+                class="nav-support"
+            >
+                Dukung Azriel
+            </a>
+
         </div>
 
-        <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
-            ☰
-        </button>
+
+        <div class="nav-actions">
+
+            <button
+                class="theme-btn"
+                id="themeBtn"
+                aria-label="Ganti tema"
+            >
+                ☀️
+            </button>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Buka menu"
+            >
+                ☰
+            </button>
+
+        </div>
 
     </nav>
 
@@ -791,7 +1460,10 @@
          HERO
     ========================= -->
 
-    <header class="hero" id="home">
+    <header
+        class="hero"
+        id="home"
+    >
 
         <div class="hero-content reveal">
 
@@ -801,7 +1473,9 @@
 
             <h1>
                 AZRIEL
-                <span>FOR OSIS.</span>
+                <span>
+                    FOR OSIS.
+                </span>
             </h1>
 
             <p class="hero-text">
@@ -810,16 +1484,25 @@
             </p>
 
             <div class="hero-buttons">
-                <a href="#visi" class="btn btn-primary">
+
+                <a
+                    href="#visi"
+                    class="btn btn-primary"
+                >
                     Lihat Visi & Misi
                 </a>
 
-                <a href="#program" class="btn btn-secondary">
+                <a
+                    href="#program"
+                    class="btn btn-secondary"
+                >
                     Program Kerja →
                 </a>
+
             </div>
 
         </div>
+
 
         <div class="hero-image reveal">
 
@@ -867,26 +1550,58 @@
 
             </div>
 
+
             <div class="about-info reveal">
 
                 <div class="info-card">
-                    <small>POSISI</small>
-                    <strong>Calon Ketua OSIS</strong>
+
+                    <small>
+                        POSISI
+                    </small>
+
+                    <strong>
+                        Calon Ketua OSIS
+                    </strong>
+
                 </div>
 
-                <div class="info-card">
-                    <small>PERIODE</small>
-                    <strong>2026 / 2027</strong>
-                </div>
 
                 <div class="info-card">
-                    <small>FOKUS</small>
-                    <strong>Kreativitas & Kebersamaan</strong>
+
+                    <small>
+                        PERIODE
+                    </small>
+
+                    <strong>
+                        2026 / 2027
+                    </strong>
+
                 </div>
 
+
                 <div class="info-card">
-                    <small>KOMITMEN</small>
-                    <strong>Bergerak Bersama</strong>
+
+                    <small>
+                        FOKUS
+                    </small>
+
+                    <strong>
+                        Kreativitas & Kebersamaan
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <small>
+                        KOMITMEN
+                    </small>
+
+                    <strong>
+                        Bergerak Bersama
+                    </strong>
+
                 </div>
 
             </div>
@@ -920,6 +1635,7 @@
             </p>
 
         </div>
+
 
         <div class="visi-box reveal">
 
@@ -958,60 +1674,115 @@
 
         </div>
 
+
         <div class="cards">
 
+
             <div class="card reveal">
-                <div class="number">01</div>
-                <h3>Meningkatkan Kebersamaan</h3>
+
+                <div class="number">
+                    01
+                </div>
+
+                <h3>
+                    Meningkatkan Kebersamaan
+                </h3>
+
                 <p>
                     Membangun rasa kebersamaan antar siswa
                     melalui kegiatan positif dan kolaboratif.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="number">02</div>
-                <h3>Menampung Aspirasi</h3>
+
+                <div class="number">
+                    02
+                </div>
+
+                <h3>
+                    Menampung Aspirasi
+                </h3>
+
                 <p>
                     Membuka ruang bagi siswa untuk menyampaikan
                     ide, kritik, dan masukan.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="number">03</div>
-                <h3>Mengembangkan Kreativitas</h3>
+
+                <div class="number">
+                    03
+                </div>
+
+                <h3>
+                    Mengembangkan Kreativitas
+                </h3>
+
                 <p>
                     Mendorong siswa untuk berani berkarya,
                     mencoba hal baru, dan menunjukkan potensinya.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="number">04</div>
-                <h3>Menciptakan Kegiatan Positif</h3>
+
+                <div class="number">
+                    04
+                </div>
+
+                <h3>
+                    Menciptakan Kegiatan Positif
+                </h3>
+
                 <p>
                     Menghadirkan kegiatan sekolah yang menarik,
                     edukatif, dan menyenangkan.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="number">05</div>
-                <h3>Meningkatkan Kedisiplinan</h3>
+
+                <div class="number">
+                    05
+                </div>
+
+                <h3>
+                    Meningkatkan Kedisiplinan
+                </h3>
+
                 <p>
                     Membangun budaya disiplin dan tanggung jawab
                     melalui contoh serta kegiatan yang positif.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="number">06</div>
-                <h3>Bergerak Bersama</h3>
+
+                <div class="number">
+                    06
+                </div>
+
+                <h3>
+                    Bergerak Bersama
+                </h3>
+
                 <p>
                     Menjadikan OSIS sebagai organisasi yang terbuka
                     dan melibatkan seluruh siswa.
                 </p>
+
             </div>
 
         </div>
@@ -1034,10 +1805,15 @@
         </h2>
 
         <p class="reveal">
+
             “Karena perubahan tidak harus dimulai
             dari seseorang yang sempurna.
-            <span>Perubahan dimulai dari seseorang
-            yang mau bergerak.</span>”
+
+            <span>
+                Perubahan dimulai dari seseorang
+                yang mau bergerak.
+            </span>”
+
         </p>
 
     </section>
@@ -1067,60 +1843,115 @@
 
         </div>
 
+
         <div class="cards">
 
+
             <div class="card reveal">
-                <div class="program-icon">🎨</div>
-                <h3>Creative Day</h3>
+
+                <div class="program-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    Creative Day
+                </h3>
+
                 <p>
                     Hari khusus untuk menampilkan kreativitas,
                     seni, karya, dan bakat siswa.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="program-icon">🏆</div>
-                <h3>School Competition</h3>
+
+                <div class="program-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    School Competition
+                </h3>
+
                 <p>
                     Kompetisi antar siswa untuk meningkatkan
                     semangat, sportivitas, dan kebersamaan.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="program-icon">💡</div>
-                <h3>Kotak Aspirasi</h3>
+
+                <div class="program-icon">
+                    💡
+                </div>
+
+                <h3>
+                    Kotak Aspirasi
+                </h3>
+
                 <p>
                     Wadah bagi siswa untuk menyampaikan
                     ide, kritik, dan saran kepada OSIS.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="program-icon">🤝</div>
-                <h3>OSIS Connect</h3>
+
+                <div class="program-icon">
+                    🤝
+                </div>
+
+                <h3>
+                    OSIS Connect
+                </h3>
+
                 <p>
                     Membangun komunikasi yang lebih dekat
                     antara OSIS dan seluruh siswa.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="program-icon">⚡</div>
-                <h3>Event Sekolah</h3>
+
+                <div class="program-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Event Sekolah
+                </h3>
+
                 <p>
                     Mengembangkan kegiatan sekolah yang
                     lebih seru, kreatif, dan berkesan.
                 </p>
+
             </div>
 
+
             <div class="card reveal">
-                <div class="program-icon">🌱</div>
-                <h3>School Care</h3>
+
+                <div class="program-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    School Care
+                </h3>
+
                 <p>
                     Mengajak siswa menjaga lingkungan sekolah
                     agar tetap nyaman dan bersih.
                 </p>
+
             </div>
 
         </div>
@@ -1147,41 +1978,57 @@
 
         </div>
 
+
         <div class="gallery">
 
+
             <div class="gallery-item reveal">
+
                 <img
                     src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
                     alt="Azriel"
                 >
+
             </div>
 
+
             <div class="gallery-item reveal">
+
                 <img
                     src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
                     alt="Poster Azriel"
                 >
+
             </div>
 
+
             <div class="gallery-item reveal">
+
                 <img
                     src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
                     alt="Azriel Campaign"
                 >
+
             </div>
 
+
             <div class="gallery-item reveal">
+
                 <img
                     src="images/WhatsApp%20Image%202026-10-03%20at%2013.44.55.jpeg"
                     alt="Poster Campaign"
                 >
+
             </div>
 
+
             <div class="gallery-item reveal">
+
                 <img
                     src="images/WhatsApp%20Image%202026-10-03%20at%2012.28.14.jpeg"
                     alt="Azriel OSIS"
                 >
+
             </div>
 
         </div>
@@ -1196,6 +2043,7 @@
     <section>
 
         <div class="poster">
+
 
             <div class="reveal">
 
@@ -1215,6 +2063,7 @@
 
             </div>
 
+
             <div class="reveal">
 
                 <img
@@ -1233,7 +2082,10 @@
          DUKUNG AZRIEL
     ========================= -->
 
-    <section id="support" class="support-section">
+    <section
+        id="support"
+        class="support-section"
+    >
 
         <div class="reveal">
 
@@ -1245,12 +2097,16 @@
                 Dukung Azriel.
             </h2>
 
-            <p class="section-description" style="margin:auto;">
+            <p
+                class="section-description"
+                style="margin:auto;"
+            >
                 Tunjukkan dukunganmu untuk semangat perubahan
                 dan kebersamaan di sekolah.
             </p>
 
         </div>
+
 
         <div class="support-box reveal">
 
@@ -1262,13 +2118,19 @@
                 Klik tombol di bawah untuk memberikan dukunganmu.
             </p>
 
+
             <div class="support-count">
-                <span id="supportCount">0</span>
+
+                <span id="supportCount">
+                    0
+                </span>
 
                 <small>
                     Dukungan di Website
                 </small>
+
             </div>
+
 
             <button
                 class="support-btn"
@@ -1297,7 +2159,9 @@
 
             <h2>
                 SAATNYA<br>
-                <span>BERGERAK.</span>
+                <span>
+                    BERGERAK.
+                </span>
             </h2>
 
             <p>
@@ -1330,7 +2194,10 @@
          BACK TO TOP
     ========================= -->
 
-    <button id="topBtn" aria-label="Kembali ke atas">
+    <button
+        id="topBtn"
+        aria-label="Kembali ke atas"
+    >
         ↑
     </button>
 
@@ -1345,133 +2212,441 @@
            NAVBAR
         ========================= */
 
-        const navbar = document.getElementById("navbar");
+        const navbar =
+            document.getElementById("navbar");
 
-        window.addEventListener("scroll", () => {
+        window.addEventListener(
+            "scroll",
+            () => {
 
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
+                if (window.scrollY > 50) {
+
+                    navbar.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    navbar.classList.remove(
+                        "scrolled"
+                    );
+
+                }
+
             }
-
-        });
+        );
 
 
         /* =========================
            MOBILE MENU
         ========================= */
 
-        const menuBtn = document.getElementById("menuBtn");
-        const navLinks = document.getElementById("navLinks");
+        const menuBtn =
+            document.getElementById("menuBtn");
 
-        menuBtn.addEventListener("click", () => {
-
-            navLinks.classList.toggle("open");
-
-            if (navLinks.classList.contains("open")) {
-                menuBtn.textContent = "✕";
-            } else {
-                menuBtn.textContent = "☰";
-            }
-
-        });
+        const navLinks =
+            document.getElementById("navLinks");
 
 
-        document.querySelectorAll(".nav-links a").forEach(link => {
+        menuBtn.addEventListener(
+            "click",
+            () => {
 
-            link.addEventListener("click", () => {
+                navLinks.classList.toggle(
+                    "open"
+                );
 
-                navLinks.classList.remove("open");
-                menuBtn.textContent = "☰";
+                if (
+                    navLinks.classList.contains(
+                        "open"
+                    )
+                ) {
 
-            });
+                    menuBtn.textContent = "✕";
 
-        });
+                } else {
 
+                    menuBtn.textContent = "☰";
 
-        /* =========================
-           SCROLL REVEAL
-        ========================= */
+                }
 
-        const revealElements = document.querySelectorAll(".reveal");
-
-        const observer = new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("active");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
             }
         );
 
-        revealElements.forEach(element => {
-            observer.observe(element);
-        });
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navLinks.classList.remove(
+                            "open"
+                        );
+
+                        menuBtn.textContent =
+                            "☰";
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           SAFE SCROLL REVEAL
+        ========================= */
+
+        document.body.classList.add(
+            "js-ready"
+        );
+
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const observer =
+                new IntersectionObserver(
+                    entries => {
+
+                        entries.forEach(
+                            entry => {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    entry.target.classList.add(
+                                        "active"
+                                    );
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.08
+                    }
+                );
+
+
+            revealElements.forEach(
+                element => {
+
+                    observer.observe(
+                        element
+                    );
+
+                }
+            );
+
+        } else {
+
+            revealElements.forEach(
+                element => {
+
+                    element.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
 
 
         /* =========================
            BACK TO TOP
         ========================= */
 
-        const topBtn = document.getElementById("topBtn");
+        const topBtn =
+            document.getElementById(
+                "topBtn"
+            );
 
-        window.addEventListener("scroll", () => {
 
-            if (window.scrollY > 500) {
-                topBtn.classList.add("show");
-            } else {
-                topBtn.classList.remove("show");
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (
+                    window.scrollY > 500
+                ) {
+
+                    topBtn.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    topBtn.classList.remove(
+                        "show"
+                    );
+
+                }
+
             }
+        );
 
-        });
 
-        topBtn.addEventListener("click", () => {
+        topBtn.addEventListener(
+            "click",
+            () => {
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
-        });
+            }
+        );
+
+
+        /* =========================
+           DARK / LIGHT MODE
+        ========================= */
+
+        const themeBtn =
+            document.getElementById(
+                "themeBtn"
+            );
+
+
+        const savedTheme =
+            localStorage.getItem(
+                "azrielTheme"
+            );
+
+
+        if (
+            savedTheme === "light"
+        ) {
+
+            document.body.classList.add(
+                "light"
+            );
+
+            themeBtn.textContent =
+                "🌙";
+
+        } else {
+
+            themeBtn.textContent =
+                "☀️";
+
+        }
+
+
+        themeBtn.addEventListener(
+            "click",
+            () => {
+
+                document.body.classList.toggle(
+                    "light"
+                );
+
+
+                const isLight =
+                    document.body.classList.contains(
+                        "light"
+                    );
+
+
+                if (isLight) {
+
+                    localStorage.setItem(
+                        "azrielTheme",
+                        "light"
+                    );
+
+                    themeBtn.textContent =
+                        "🌙";
+
+                } else {
+
+                    localStorage.setItem(
+                        "azrielTheme",
+                        "dark"
+                    );
+
+                    themeBtn.textContent =
+                        "☀️";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           IMAGE LIGHTBOX
+        ========================= */
+
+        const lightbox =
+            document.getElementById(
+                "imageLightbox"
+            );
+
+        const lightboxImage =
+            document.getElementById(
+                "lightboxImage"
+            );
+
+        const lightboxClose =
+            document.getElementById(
+                "lightboxClose"
+            );
+
+
+        const clickableImages =
+            document.querySelectorAll(
+                ".gallery-item img, " +
+                ".hero-image img, " +
+                ".poster img"
+            );
+
+
+        clickableImages.forEach(
+            img => {
+
+                img.addEventListener(
+                    "click",
+                    () => {
+
+                        lightboxImage.src =
+                            img.src;
+
+                        lightboxImage.alt =
+                            img.alt;
+
+                        lightbox.classList.add(
+                            "show"
+                        );
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                    }
+                );
+
+            }
+        );
+
+
+        function closeLightbox() {
+
+            lightbox.classList.remove(
+                "show"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        lightboxClose.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+
+        lightbox.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    lightbox.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
 
 
         /* =========================
            DUKUNG AZRIEL
         ========================= */
 
-        const supportBtn = document.getElementById("supportBtn");
-        const supportCount = document.getElementById("supportCount");
+        const supportBtn =
+            document.getElementById(
+                "supportBtn"
+            );
+
+        const supportCount =
+            document.getElementById(
+                "supportCount"
+            );
+
 
         let supports = Number(
-            localStorage.getItem("azrielSupportCount") || 0
+            localStorage.getItem(
+                "azrielSupportCount"
+            ) || 0
         );
 
+
         let alreadySupported =
-            localStorage.getItem("azrielAlreadySupported") === "true";
+            localStorage.getItem(
+                "azrielAlreadySupported"
+            ) === "true";
 
 
         function updateSupportDisplay() {
 
             supportCount.textContent =
-                supports.toLocaleString("id-ID");
+                supports.toLocaleString(
+                    "id-ID"
+                );
+
 
             if (alreadySupported) {
 
-                supportBtn.textContent = "✓ Sudah Didukung";
-                supportBtn.classList.add("supported");
+                supportBtn.textContent =
+                    "✓ Sudah Didukung";
+
+                supportBtn.classList.add(
+                    "supported"
+                );
 
             }
 
@@ -1481,71 +2656,103 @@
         updateSupportDisplay();
 
 
-        supportBtn.addEventListener("click", function(event) {
+        supportBtn.addEventListener(
+            "click",
+            () => {
 
-            if (alreadySupported) {
-                return;
+                if (alreadySupported) {
+                    return;
+                }
+
+
+                supports++;
+
+                alreadySupported = true;
+
+
+                localStorage.setItem(
+                    "azrielSupportCount",
+                    supports
+                );
+
+
+                localStorage.setItem(
+                    "azrielAlreadySupported",
+                    "true"
+                );
+
+
+                updateSupportDisplay();
+
+
+                /* HEART ANIMATION */
+
+                const heart =
+                    document.createElement(
+                        "div"
+                    );
+
+                heart.className =
+                    "heart-pop";
+
+                heart.textContent =
+                    "❤️";
+
+
+                const rect =
+                    supportBtn.getBoundingClientRect();
+
+
+                heart.style.left =
+                    (
+                        rect.left +
+                        rect.width / 2
+                    ) + "px";
+
+
+                heart.style.top =
+                    rect.top + "px";
+
+
+                document.body.appendChild(
+                    heart
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        heart.remove();
+
+                    },
+                    1000
+                );
+
             }
-
-            supports++;
-
-            alreadySupported = true;
-
-            localStorage.setItem(
-                "azrielSupportCount",
-                supports
-            );
-
-            localStorage.setItem(
-                "azrielAlreadySupported",
-                "true"
-            );
-
-            updateSupportDisplay();
-
-
-            /* HEART ANIMATION */
-
-            const heart = document.createElement("div");
-
-            heart.className = "heart-pop";
-            heart.textContent = "❤️";
-
-            const rect =
-                supportBtn.getBoundingClientRect();
-
-            heart.style.left =
-                `${rect.left + rect.width / 2}px`;
-
-            heart.style.top =
-                `${rect.top}px`;
-
-            document.body.appendChild(heart);
-
-
-            setTimeout(() => {
-                heart.remove();
-            }, 1000);
-
-        });
+        );
 
 
         /* =========================
            IMAGE ERROR CHECK
         ========================= */
 
-        document.querySelectorAll("img").forEach(img => {
+        document
+            .querySelectorAll("img")
+            .forEach(img => {
 
-            img.addEventListener("error", () => {
+                img.addEventListener(
+                    "error",
+                    () => {
 
-                console.warn(
-                    "Gambar tidak ditemukan:",
-                    img.src
+                        console.warn(
+                            "Gambar tidak ditemukan:",
+                            img.src
+                        );
+
+                    }
                 );
 
             });
-
-        });
 
     </script>
 
